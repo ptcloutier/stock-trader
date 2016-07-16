@@ -36,8 +36,8 @@
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     
-    self.companyList = @[@"Apple mobile devices",@"Samsung mobile devices"];
-    self.title = @"Mobile device makers";
+    self.companyList = @[@"Apple",@"Google", @"Tesla", @"Twitter"];
+    self.title = @"Company";
     
     
 }
@@ -52,14 +52,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
+//#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+//#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [self.companyList count];
 }
@@ -124,12 +124,14 @@
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-
     if (indexPath.row == 0){
-        self.productViewController.title = @"Apple mobile devices";
-    } else {
-        self.productViewController.title = @"Samsung mobile devices";
+        self.productViewController.title = @"Apple";
+    } else if (indexPath.row == 1){
+        self.productViewController.title = @"Google";
+    } else if (indexPath.row == 2){
+        self.productViewController.title = @"Tesla";
+    }else if (indexPath.row == 3){
+        self.productViewController.title = @"Twitter";
     }
     
     [self.navigationController

@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WebViewController.h"
+@import WebKit;
 
-@interface ProductViewController : UITableViewController
-@property (nonatomic, retain) NSArray *products;
+@interface ProductViewController : UITableViewController <WKNavigationDelegate>
+@property (nonatomic, retain) NSMutableArray *companyList;
+@property (nonatomic, retain) NSMutableArray *products;
+@property (strong, nonatomic) WKWebView *webView;
+@property (nonatomic, retain) WebViewController *webViewController;
+
 @end
