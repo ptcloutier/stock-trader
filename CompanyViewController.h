@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Company.h"
+#import "Product.h"
+#import "ProductViewController.h"
+
 
 @class ProductViewController;
 
 @interface CompanyViewController : UITableViewController
 
-@property (nonatomic, retain) NSArray *companyList;
+@property (nonatomic, strong) Company *company;
+@property (nonatomic, retain) NSMutableArray *companyList;
 
-@property (nonatomic, retain) IBOutlet  ProductViewController * productViewController;
-
+ 
 @end
