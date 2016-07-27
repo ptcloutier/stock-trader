@@ -10,6 +10,7 @@
 #import "Company.h"
 #import "Product.h"
 #import "ProductViewController.h"
+#import "DAO.h"
 
 
 @class ProductViewController;

@@ -11,6 +11,7 @@
 #import "WebViewController.h"
 #import "Company.h"
 #import "Product.h"
+#import "DAO.h"
 @import WebKit;
 
 @interface ProductViewController : UITableViewController <WKNavigationDelegate>

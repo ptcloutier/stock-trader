@@ -26,6 +26,7 @@
 		A710280D1D3931CC005985A0 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A710280C1D3931CC005985A0 /* Launch Screen.storyboard */; };
 		A7442C2D1D3E9B3A00CC4FC0 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = A7442C2C1D3E9B3A00CC4FC0 /* Company.m */; };
 		A7442C301D3E9B5A00CC4FC0 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = A7442C2F1D3E9B5A00CC4FC0 /* Product.m */; };
+		A78BD66A1D4933AE00A9F871 /* DAO.m in Sources */ = {isa = PBXBuildFile; fileRef = A78BD6691D4933AE00A9F871 /* DAO.m */; };
 		A78D12891D36EF4700E24CCC /* Company Logos in Resources */ = {isa = PBXBuildFile; fileRef = A78D12881D36EF4700E24CCC /* Company Logos */; };
 		A792918B1D3825D700524F32 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A792918A1D3825D700524F32 /* WebKit.framework */; };
 		A792918F1D3840A400524F32 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A792918D1D3840A400524F32 /* WebViewController.m */; };
@@ -70,6 +71,8 @@
 		A7442C2C1D3E9B3A00CC4FC0 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
 		A7442C2E1D3E9B5A00CC4FC0 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
 		A7442C2F1D3E9B5A00CC4FC0 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
+		A78BD6681D4933AE00A9F871 /* DAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAO.h; sourceTree = "<group>"; };
+		A78BD6691D4933AE00A9F871 /* DAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAO.m; sourceTree = "<group>"; };
 		A78D12881D36EF4700E24CCC /* Company Logos */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Company Logos"; sourceTree = "<group>"; };
 		A792918A1D3825D700524F32 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		A792918C1D3840A400524F32 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
@@ -132,6 +135,8 @@
 				A7442C2C1D3E9B3A00CC4FC0 /* Company.m */,
 				A7442C2E1D3E9B5A00CC4FC0 /* Product.h */,
 				A7442C2F1D3E9B5A00CC4FC0 /* Product.m */,
+				A78BD6681D4933AE00A9F871 /* DAO.h */,
+				A78BD6691D4933AE00A9F871 /* DAO.m */,
 			);
 			name = ProductViewController;
 			sourceTree = "<group>";
@@ -317,6 +322,7 @@
 				48A656E618163C1B00746D36 /* CompanyViewController.m in Sources */,
 				A7442C2D1D3E9B3A00CC4FC0 /* Company.m in Sources */,
 				A792918F1D3840A400524F32 /* WebViewController.m in Sources */,
+				A78BD66A1D4933AE00A9F871 /* DAO.m in Sources */,
 				48A656C518163BF200746D36 /* NavControllerAppDelegate.m in Sources */,
 				48A656C118163BF200746D36 /* main.m in Sources */,
 				48A656EB18163F8700746D36 /* ProductViewController.m in Sources */,
