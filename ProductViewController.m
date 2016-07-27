@@ -30,18 +30,18 @@
     
     [super viewWillAppear:animated];
     
-    if ([self.title isEqualToString:@"Apple"]) {
-        self.products = [[NSMutableArray alloc]initWithArray: self.products1 ];
-    }
-    else if ([self.title isEqualToString:@"Google"]){
-        self.products = [[NSMutableArray alloc]initWithArray: self.products2 ];
-    }
-    else if ([self.title isEqualToString:@"Tesla"]){
-        self.products = [[NSMutableArray alloc]initWithArray: self.products3 ];
-    }
-    else if ([self.title isEqualToString:@"Twitter"]){
-        self.products = [[NSMutableArray alloc]initWithArray: self.products4 ];
-    }
+//    if ([self.company.name isEqualToString:@"Apple"]) {
+//        self.company.product =[[NSMutableArray alloc]initWithArray: Apple.product];
+//    }
+//    else if ([self.company.name isEqualToString:@"Google"]){
+//        self.products = [[NSMutableArray alloc]initWithArray: self.products2 ];
+//    }
+//    else if ([self.company.name isEqualToString:@"Tesla"]){
+//        self.products = [[NSMutableArray alloc]initWithArray: self.products3 ];
+//    }
+//    else if ([self.company.name isEqualToString:@"Twitter"]){
+//        self.products = [[NSMutableArray alloc]initWithArray: self.products4 ];
+//    }
     [self.tableView reloadData];
 }
 
@@ -49,12 +49,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.company = [[Company alloc]init];
+    self.company = self.companyFromView;
+    
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
-    self.products1 = [[NSMutableArray alloc]initWithObjects: @"iPad", @"iPod Touch",@"iPhone", nil];
-    self.products2 = [[NSMutableArray alloc]initWithObjects: @"Pixel C", @"Nexus SP", @"Google Cardboard", nil];
-    self.products3 = [[NSMutableArray alloc]initWithObjects: @"Model S", @"Model X", @"Model 3", nil];
-    self.products4 = [[NSMutableArray alloc]initWithObjects: @"Twitter Apps", nil];
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -79,7 +78,9 @@
 {
     //#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [self.products count];
+  
+    return [self.company.products count];
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -90,22 +91,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     // Configure the cell...
-    if ([self.title isEqualToString:@"Apple"]) {
-        cell.imageView.image = [UIImage imageNamed:@"img-companyLogo_Apple.png"];
-        cell.textLabel.text = [self.products objectAtIndex:[indexPath row]];
-    }
-    if ([self.title isEqualToString:@"Google"]){
-        cell.imageView.image = [UIImage imageNamed:@"img-companyLogo_Google.png"];
-        cell.textLabel.text = [self.products objectAtIndex:[indexPath row]];
-    }
-    if ([self.title isEqualToString:@"Tesla"]){
-        cell.imageView.image = [UIImage imageNamed:@"img-companyLogo_Tesla.png"];
-        cell.textLabel.text = [self.products objectAtIndex:[indexPath row]];
-    }
-    if ([self.title isEqualToString:@"Twitter"]){
-        cell.imageView.image = [UIImage imageNamed:@"img-companyLogo_Twitter.png"];
-        cell.textLabel.text = [self.products objectAtIndex:[indexPath row]];
-    }
+    cell.imageView.image =  self.company.logo;
+    self.product = [[self.company products]objectAtIndex:indexPath.row] ;
+    cell.textLabel.text = self.product.name ;
     return cell;
 }
 
@@ -119,22 +107,9 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.products removeObjectAtIndex:indexPath.row];
+//        [self.products removeObjectAtIndex:indexPath.row];
         
-        if ([self.title isEqualToString:@"Apple"]) {
-            [self.products1 removeObjectAtIndex:indexPath.row ];
-        }
-        else if ([self.title isEqualToString:@"Google"]){
-            [self.products2 removeObjectAtIndex:indexPath.row ];
-            ;
-        }
-        else if ([self.title isEqualToString:@"Tesla"]){
-            [self.products3 removeObjectAtIndex:indexPath.row ];
-        }
-        else if ([self.title isEqualToString:@"Twitter"]){
-            [self.products4 removeObjectAtIndex:indexPath.row ];
-            ;
-        }
+        [self.company.products removeObjectAtIndex:indexPath.row ];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [tableView reloadData];
     }
@@ -145,16 +120,9 @@
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    if ([self.title isEqualToString:@"Apple"]){
-        [self.products1 exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];
-    }if ([self.title isEqualToString:@"Google"]){
-        [self.products2 exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];
-    }if ([self.title isEqualToString:@"Tesla"]){
-        [self.products3 exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];
-    } if ([self.title isEqualToString:@"Twitter"]){
-        [self.products4 exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];
-    }
+    [self.company.products exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];
 }
+
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -171,59 +139,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.webViewController = [[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
-    self.webViewController.url = [self getProductURL:indexPath];
+    Product *product = [self.company.products objectAtIndex:indexPath.row];
+    self.webViewController.url = product.url;
     [self.navigationController pushViewController:self.webViewController animated:YES];
     [self.webViewController release];
     
 }
 
-
--(NSURL *)getProductURL:(NSIndexPath *)indexPath
-{
-    NSString *urlString;
-    NSURL *url;
-    
-    if ([self.title isEqualToString:@"Apple"]) {
-        if (indexPath.row == 0){
-            urlString = @"http://www.apple.com/ipad/";
-        } else if (indexPath.row == 1){
-            urlString = @"http://www.apple.com/ipod-touch/";
-        } else if (indexPath.row == 2){
-            urlString = @"http://www.apple.com/iphone/";
-        }
-    }
-    if ([self.title isEqualToString:@"Google"]) {
-        if (indexPath.row == 0){
-            urlString = @"https://store.google.com/product/pixel_c?gl=us";
-        } else if (indexPath.row == 1){
-            urlString = @"https://store.google.com/product/nexus_6p?gl=us";
-        } else if (indexPath.row == 2){
-            urlString = @"https://store.google.com/product/google_cardboard?utm_source=en-ha-na-us-sem&utm_medium=desktop&utm_content=plas&utm_campaign=Cardboard&gl=us&gclid=COW08Z7j880CFQFkhgods5cHyQ";
-        }
-    }
-    if ([self.title isEqualToString:@"Tesla"]) {
-        if (indexPath.row == 0){
-            urlString = @"https://www.teslamotors.com/models";
-        } else if (indexPath.row == 1){
-            urlString = @"https://www.teslamotors.com/modelx";
-        } else if (indexPath.row == 2){
-            urlString = @"https://www.teslamotors.com/model3";
-        }
-    }
-    if ([self.title isEqualToString:@"Twitter"]) {
-        if (indexPath.row == 0){
-            urlString = @"https://about.twitter.com/products/list";
-        } else if (indexPath.row == 1){
-            urlString = @"https://about.twitter.com/products/list";
-        } else if (indexPath.row == 2){
-            urlString = @"https://about.twitter.com/products/list";
-        }
-    }
-    url = [NSURL URLWithString: urlString];
-    return url;
-    
-}
-/*   // Navigation logic may go here, for example:
+ 
+ /*   // Navigation logic may go here, for example:
  // Create the next view controller.
  <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
  

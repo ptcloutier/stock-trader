@@ -9,6 +9,7 @@
 #import "CompanyViewController.h"
 #import "ProductViewController.h"
 
+
 @interface CompanyViewController ()
 
 @end
@@ -34,13 +35,12 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    DAO *daObject = [[DAO alloc]init];
+    [daObject createCompanies];
+    self.companyList = daObject.companyList;
     
-    
-    self.companyList = @[@"Apple",@"Google", @"Tesla", @"Twitter"];
-    self.title = @"Company";
-    
-    
-}
+ }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -74,7 +74,9 @@
     
     // Configure the cell...
     
-    cell.textLabel.text = [self.companyList objectAtIndex:[indexPath row]];
+    Company *company = [self.companyList objectAtIndex:[indexPath row]];
+    
+    cell.textLabel.text = company.name;
     
     return cell;
 }
@@ -124,21 +126,14 @@
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0){
-        self.productViewController.title = @"Apple";
-    } else if (indexPath.row == 1){
-        self.productViewController.title = @"Google";
-    } else if (indexPath.row == 2){
-        self.productViewController.title = @"Tesla";
-    }else if (indexPath.row == 3){
-        self.productViewController.title = @"Twitter";
-    }
-    
+    ProductViewController *productViewController = [[ProductViewController alloc]init];
+     Company *company = [self.companyList objectAtIndex:[indexPath row]];
+    productViewController.companyFromView = company;
+     
     [self.navigationController
-        pushViewController:self.productViewController
+        pushViewController:productViewController
         animated:YES];
     
-
 }
  
 
