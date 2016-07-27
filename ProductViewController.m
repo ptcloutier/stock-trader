@@ -29,19 +29,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    
-//    if ([self.company.name isEqualToString:@"Apple"]) {
-//        self.company.product =[[NSMutableArray alloc]initWithArray: Apple.product];
-//    }
-//    else if ([self.company.name isEqualToString:@"Google"]){
-//        self.products = [[NSMutableArray alloc]initWithArray: self.products2 ];
-//    }
-//    else if ([self.company.name isEqualToString:@"Tesla"]){
-//        self.products = [[NSMutableArray alloc]initWithArray: self.products3 ];
-//    }
-//    else if ([self.company.name isEqualToString:@"Twitter"]){
-//        self.products = [[NSMutableArray alloc]initWithArray: self.products4 ];
-//    }
     [self.tableView reloadData];
 }
 
