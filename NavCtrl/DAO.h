@@ -7,15 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FormViewController.h"
 #import "Product.h"
 #import "Company.h"
 
 
 @interface DAO : NSObject
 
+
 @property (strong, nonatomic) NSMutableArray *companyList;
+@property (strong, nonatomic) Company *company;
+
 
 -(void)createCompanies;
-+(instancetype)sharedDAOClass;
+-(void)addCompanyToCompanyList:(Company *)company;
+
++(instancetype)sharedManager;
 
 @end

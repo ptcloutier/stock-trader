@@ -12,9 +12,13 @@
 @interface Company : NSObject
 
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) UIImage *logo;
+@property (strong, nonatomic) NSString *logo;
+@property (strong, nonatomic) NSString *stockSymbol;
 @property (strong, nonatomic) NSMutableArray *products;
+//-(void)addProductToProducts:(Product *)product;
 
--(instancetype)initWithName:(NSString *)name andLogo:(UIImage *)logo andProducts:(NSMutableArray *)products;
+-(instancetype)initWithName:(NSString *)name andLogo:(NSString *)logo andStockSymbol:(NSString *)stockSymbol;
+-(instancetype)initWithName:(NSString *)name andLogo:(NSString *)logo andStockSymbol:(NSString *)stockSymbol andProducts:(NSMutableArray *)products;
+;
 
 @end

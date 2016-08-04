@@ -34,12 +34,22 @@
      self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    DAO *daObject = [[DAO alloc]init];
+    UIBarButtonItem *addButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(addButtonTouched)];
+    
+    self.navigationItem.rightBarButtonItem = addButtonItem;
+    
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+ 
+    
+    DAO *daObject = [DAO sharedManager]; // add four companies to the list
     [daObject createCompanies];
     self.companyList = daObject.companyList;
     
- }
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData]; // refresh tableview whenever it is shown to reflect any changes in data, adding or removing companies
+}
 
 
 - (void)didReceiveMemoryWarning
@@ -73,52 +83,58 @@
     }
     
     // Configure the cell...
-    
-    Company *company = [self.companyList objectAtIndex:[indexPath row]];
-    
-    cell.textLabel.text = company.name;
+    DAO *daObject = [DAO sharedManager];
+    Company *company = [daObject.companyList objectAtIndex:[indexPath row]];
+    cell.textLabel.text =  company.name;
     
     return cell;
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+         
         // Delete the row from the data source
+        [self.companyList removeObjectAtIndex:indexPath.row ];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadData];
+
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+       
+        
+                
     }   
 }
-*/
 
-/*
+
+
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
 }
-*/
 
-/*
+
+
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the item to be re-orderable.
     return YES;
 }
-*/
+
 
 
 #pragma mark - Table view delegate
@@ -126,8 +142,11 @@
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     ProductViewController *productViewController = [[ProductViewController alloc]init];
-     Company *company = [self.companyList objectAtIndex:[indexPath row]];
+
+    Company *company = [self.companyList objectAtIndex:[indexPath row]];
+    
     productViewController.companyFromView = company;
      
     [self.navigationController
@@ -135,7 +154,18 @@
         animated:YES];
     
 }
- 
+
+-(void)addButtonTouched {
+    
+    NSLog(@"add button touched!");
+    
+    FormViewController *formViewController = [[FormViewController alloc]initWithNibName: @"FormViewController" bundle: nil];
+    formViewController.companyVC = self;
+    
+    [self.navigationController pushViewController:formViewController animated:YES];
+    
+}
+
 
 
 @end

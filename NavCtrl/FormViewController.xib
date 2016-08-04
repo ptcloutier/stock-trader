@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FormViewController">
+            <connections>
+                <outlet property="logoInput" destination="vgt-hR-GOy" id="lDZ-o3-zst"/>
+                <outlet property="nameInput" destination="4d8-w2-yCw" id="viL-jP-vzy"/>
+                <outlet property="stockSymbolInput" destination="3st-Lo-uEM" id="PEb-gY-YEd"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Xek-O3-8Qa"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Company name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4d8-w2-yCw">
+                    <rect key="frame" x="75" y="186" width="450" height="30"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stock Symbol" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3st-Lo-uEM">
+                    <rect key="frame" x="75" y="285" width="450" height="30"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Logo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vgt-hR-GOy">
+                    <rect key="frame" x="75" y="384" width="450" height="30"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="vgt-hR-GOy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="1iz-Pn-nth"/>
+                <constraint firstItem="3st-Lo-uEM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="2hS-lR-KfM"/>
+                <constraint firstItem="4d8-w2-yCw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="35F-11-rAL"/>
+                <constraint firstItem="3st-Lo-uEM" firstAttribute="top" secondItem="4d8-w2-yCw" secondAttribute="bottom" constant="69" id="Efx-R7-oca"/>
+                <constraint firstItem="vgt-hR-GOy" firstAttribute="height" secondItem="3st-Lo-uEM" secondAttribute="height" id="L1H-8R-NlT"/>
+                <constraint firstItem="vgt-hR-GOy" firstAttribute="width" secondItem="3st-Lo-uEM" secondAttribute="width" id="N4x-Kx-kfM"/>
+                <constraint firstItem="3st-Lo-uEM" firstAttribute="height" secondItem="4d8-w2-yCw" secondAttribute="height" id="PDq-CK-cao"/>
+                <constraint firstItem="4d8-w2-yCw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="186" id="sXv-8f-N1d"/>
+                <constraint firstItem="4d8-w2-yCw" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="3:4" id="tWJ-eB-94s"/>
+                <constraint firstItem="3st-Lo-uEM" firstAttribute="width" secondItem="4d8-w2-yCw" secondAttribute="width" id="tq7-9o-E7O"/>
+                <constraint firstItem="vgt-hR-GOy" firstAttribute="top" secondItem="3st-Lo-uEM" secondAttribute="bottom" constant="69" id="w3c-DS-3iz"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

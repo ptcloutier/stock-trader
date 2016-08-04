@@ -7,8 +7,11 @@
 //
 
 #import "ProductViewController.h"
+#import "ProductFormViewController.h"
+
 
 @interface ProductViewController ()
+
 
 
 
@@ -29,19 +32,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    
-//    if ([self.company.name isEqualToString:@"Apple"]) {
-//        self.company.product =[[NSMutableArray alloc]initWithArray: Apple.product];
-//    }
-//    else if ([self.company.name isEqualToString:@"Google"]){
-//        self.products = [[NSMutableArray alloc]initWithArray: self.products2 ];
-//    }
-//    else if ([self.company.name isEqualToString:@"Tesla"]){
-//        self.products = [[NSMutableArray alloc]initWithArray: self.products3 ];
-//    }
-//    else if ([self.company.name isEqualToString:@"Twitter"]){
-//        self.products = [[NSMutableArray alloc]initWithArray: self.products4 ];
-//    }
     [self.tableView reloadData];
 }
 
@@ -49,20 +39,39 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.company = [[Company alloc]init];
+    
+    
+    
     self.company = self.companyFromView;
     
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UIBarButtonItem *addButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(addButtonTouched)];
+    
+    
+    self.navigationItem.rightBarButtonItems = @[addButtonItem, self.editButtonItem];
+    
+//    self.navigationItem.leftBarButtonItem = ;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)addButtonTouched {
+    
+    NSLog(@"add products button touched!");
+    
+    ProductFormViewController *productFormViewController = [[ProductFormViewController alloc]initWithNibName: @"ProductFormViewController" bundle: nil];
+    productFormViewController.productVC = self;
+    productFormViewController.passedCompany = self.company;
+    
+    [self.navigationController pushViewController:productFormViewController animated:YES];
+    
 }
 
 #pragma mark - Table view data source
@@ -91,7 +100,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     // Configure the cell...
-    cell.imageView.image =  self.company.logo;
+//    cell.imageView.image = [UIImage imageNamed:self.company.logo];
     self.product = [[self.company products]objectAtIndex:indexPath.row] ;
     cell.textLabel.text = self.product.name ;
     return cell;
@@ -107,7 +116,6 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        [self.products removeObjectAtIndex:indexPath.row];
         
         [self.company.products removeObjectAtIndex:indexPath.row ];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -115,6 +123,7 @@
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        
     }
 }
 
