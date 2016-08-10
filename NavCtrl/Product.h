@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSURL *url;
-- (instancetype)initWithName:(NSString *)name andURL:(NSURL *)url;
+@property (strong, nonatomic) NSURL *imageURL;
 
+- (instancetype)initWithName:(NSString *)name andURL:(NSString *)url andImageURL:(NSString *)imageURL;
 @end
