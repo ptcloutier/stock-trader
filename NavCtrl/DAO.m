@@ -10,32 +10,65 @@
 
 @implementation DAO
 
-static DAO *daObject = nil;
+static DAO *dao = nil;
 
 +(instancetype)sharedManager
 {
-    if (! daObject) {
+    if (! dao) {
         
-        daObject = [[DAO alloc] init];
+        dao = [[DAO alloc] init];
     }
-    return daObject;
+    return dao;
 }
 
 
  
 -(instancetype)init
 {
-    if (! daObject) {
-        daObject = [super init];
+    if (! dao) {
+        dao = [super init];
+        _daoDidReceiveStockPricesNotification = @"daoDidReceiveStockPricesNotification ";
          NSLog(@"%s", __PRETTY_FUNCTION__);
     }
-    return daObject;
+    return dao;
 }
     
 -(void)addCompanyToCompanyList:(Company*)company
 {
     
     [self.companyList addObject:company];
+}
+
+-(void)getStockQuotes
+{
+    //http://finance.yahoo.com/d/quotes.csv?s=AAPL+GOOG+TSLA+TWTR&f=sa
+    
+    DAO *dao = [DAO sharedManager];
+    NSMutableArray *stockSymbols = [[NSMutableArray alloc]init];
+    
+    for (Company *company  in dao.companyList) { // make array of stock symbols
+        [stockSymbols addObject:company.stockSymbol];
+    }
+    NSString *urlString = [stockSymbols componentsJoinedByString:@"+"];
+    NSString *dataUrl = [NSString stringWithFormat:@"http://finance.yahoo.com/d/quotes.csv?s=%@&f=a",urlString];
+    NSURL *url = [NSURL URLWithString:dataUrl];
+    NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession]
+                      dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                          NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                          NSArray *stockPricesArray = [dataString componentsSeparatedByString:@"\n"];
+                          dao.stockPrices = [NSMutableArray arrayWithArray: stockPricesArray];
+                           NSLog(@"%@", dao.stockPrices);
+                          if ( dao.stockPrices != nil){
+                              
+                              dispatch_async(dispatch_get_main_queue(), ^{
+                                  [[NSNotificationCenter defaultCenter]
+                                   postNotificationName:self.daoDidReceiveStockPricesNotification
+                                   object:self];
+                              });
+                          }
+            }];
+[dataTask resume];
+
 }
 
 
@@ -78,22 +111,22 @@ static DAO *daObject = nil;
     
     Company *apple = [[Company alloc]initWithName:@"Apple"
                                           andLogo:@"img-companyLogo_Apple.png"
-                                   andStockSymbol:@""
+                                   andStockSymbol:@"AAPL"
                                       andProducts:[NSMutableArray arrayWithObjects:ipad, ipodTouch, iphone, nil ]];
     
     Company *google = [[Company alloc]initWithName:@"Google"
                                            andLogo:@"img-companyLogo_Google.png"
-                                    andStockSymbol:@""
+                                    andStockSymbol:@"GOOG"
                                        andProducts:[NSMutableArray arrayWithObjects:pixelC, nexusSP, googleCardboard, nil]];
     
     Company *tesla = [[Company alloc]initWithName:@"Tesla"
                                           andLogo:@"img-companyLogo_Tesla.png"
-                                   andStockSymbol:@""
+                                   andStockSymbol:@"TSLA"
                                       andProducts:[NSMutableArray arrayWithObjects:modelS, modelX, model3, nil]];
     
     Company *twitter = [[Company alloc]initWithName:@"Twitter"
                                             andLogo:@"img-companyLogo_Twitter.png"
-                                     andStockSymbol:@""
+                                     andStockSymbol:@"TWTR"
                                         andProducts:[NSMutableArray arrayWithObjects:twitterApps, nil]];
     
     

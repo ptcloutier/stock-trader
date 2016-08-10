@@ -11,15 +11,15 @@
 #import "Product.h"
 #import "ProductViewController.h"
 #import "FormViewController.h"
-#import "DAO.h"
-
-
 @class ProductViewController;
 
 @interface CompanyViewController : UITableViewController
 
+@property (nonatomic, strong)  NSString *daoDidReceiveStockPricesNotification;
 @property (nonatomic, strong) Company *company;
 @property (nonatomic, retain) NSMutableArray *companyList;
-
+-(void)daoDidReceiveStockPrices:(NSNotification *)notification;
  
 @end
+
+

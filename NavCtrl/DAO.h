@@ -14,14 +14,14 @@
 
 @interface DAO : NSObject
 
-
+@property (strong, nonatomic) NSMutableArray *stockPrices;
 @property (strong, nonatomic) NSMutableArray *companyList;
 @property (strong, nonatomic) Company *company;
-
-
+@property (strong, nonatomic) NSString *daoDidReceiveStockPricesNotification;
 -(void)createCompanies;
 -(void)addCompanyToCompanyList:(Company *)company;
-
+-(void)getStockQuotes;
 +(instancetype)sharedManager;
+
 
 @end

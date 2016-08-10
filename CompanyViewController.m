@@ -8,13 +8,18 @@
 
 #import "CompanyViewController.h"
 #import "ProductViewController.h"
-
+#import "DAO.h"
 
 @interface CompanyViewController ()
 
+@property (nonatomic, strong) DAO *dao;
+
+
 @end
 
+
 @implementation CompanyViewController
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -39,16 +44,22 @@
     self.navigationItem.rightBarButtonItem = addButtonItem;
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
- 
     
-    DAO *daObject = [DAO sharedManager]; // add four companies to the list
-    [daObject createCompanies];
-    self.companyList = daObject.companyList;
+    
+    
+    self.dao = [DAO sharedManager]; // add four companies to the list
+    [self.dao createCompanies];
+    self.companyList = self.dao.companyList;
+    
     
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [self.tableView reloadData]; // refresh tableview whenever it is shown to reflect any changes in data, adding or removing companies
+    
+    [self.dao getStockQuotes];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(daoDidReceiveStockPrices:) name:self.dao.daoDidReceiveStockPricesNotification object:nil];
+//    [self.tableView reloadData]; // refresh tableview whenever it is shown to reflect any changes in data, adding or removing companies
 }
 
 
@@ -83,9 +94,10 @@
     }
     
     // Configure the cell...
-    DAO *daObject = [DAO sharedManager];
-    Company *company = [daObject.companyList objectAtIndex:[indexPath row]];
-    cell.textLabel.text =  company.name;
+    
+    Company *company = [self.dao.companyList objectAtIndex:[indexPath row]];
+    NSString *stockPrice = [self.dao.stockPrices objectAtIndex:[indexPath row]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ (%@) %@",company.name, company.stockSymbol, stockPrice] ;
     
     return cell;
 }
@@ -155,16 +167,31 @@
     
 }
 
--(void)addButtonTouched {
-    
+-(void)addButtonTouched
+{
     NSLog(@"add button touched!");
-    
     FormViewController *formViewController = [[FormViewController alloc]initWithNibName: @"FormViewController" bundle: nil];
     formViewController.companyVC = self;
-    
     [self.navigationController pushViewController:formViewController animated:YES];
     
 }
+
+-(void)daoDidReceiveStockPrices:(NSNotification *)notification
+{
+    [self.tableView reloadData];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:self.dao.daoDidReceiveStockPricesNotification
+                                                  object:nil];
+}
+
+
+
+
 
 
 
