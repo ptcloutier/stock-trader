@@ -9,8 +9,7 @@
 #import "FormViewController.h"
 
 @interface FormViewController ()
-@property (retain, nonatomic) IBOutlet UITextField *logoInput;
-
+ 
 @end
 
 @implementation FormViewController
@@ -38,7 +37,7 @@
     // Do any additional setup after loading the view.
     
     UIBarButtonItem *cancelButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelForm)];
-    UIBarButtonItem *saveButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(companyFromInput)];
+    UIBarButtonItem *saveButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(editOrCreateNew)];
     
     self.navigationItem.leftBarButtonItem = cancelButtonItem;
     self.navigationItem.rightBarButtonItem = saveButtonItem;
@@ -46,9 +45,19 @@
     self.nameInput.delegate = self;
     self.stockSymbolInput.delegate = self;
     self.logoInput.delegate = self;
-
-     
+    self.title = @"New Company";
+   
+    if (self.companyVC){
+        if (self.companyVC.editCompany == TRUE) {
+            self.title = @"Edit Company";
+            self.nameInput.text = self.company.name;
+            self.logoInput.text = self.company.logo;
+            self.stockSymbolInput.text = self.company.stockSymbol;
+        }
+    }
  }
+
+
 -(void)textViewShouldReturn:(UITextField *)textField
 {
     if ([textField.text isEqualToString:@""]){
@@ -69,21 +78,52 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)companyFromInput
-{
-    Company * company = [[Company alloc] initWithName:self.nameInput.text andLogo:self.logoInput.text andStockSymbol:self.stockSymbolInput.text];
+-(void)editOrCreateNew {
+    if (self.companyVC){
+        if (self.companyVC.editCompany == TRUE){
+            [self modifyCompanyFromInput];
+            self.companyVC.editCompany = FALSE;
+        }else{
+            [self createCompanyFromInput];
+        }
+    }else{
+        [self createFirstCompany];
+    }
+}
+
+
+-(void)modifyCompanyFromInput {
     
-    [[DAO sharedManager] addCompanyToCompanyList:company];
+    [[DAO sharedManager] modifyCompany:self.company companyName:self.nameInput.text andLogo:self.logoInput.text andStockSymbol:self.stockSymbolInput.text];
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+-(void)createFirstCompany {
+    self.company = [[DAO sharedManager] createCompanyWithName:self.nameInput.text andLogo:self.logoInput.text andStockSymbol:self.stockSymbolInput.text];
+//    if(self.company){
+//        self.companyVC = [[CompanyViewController alloc]initWithNibName:@"CompanyViewController" bundle:nil];
+//        [self.navigationController pushViewController:self.companyVC animated:YES];
+//    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+//    }
+}
+
+-(void)createCompanyFromInput
+{
+    self.company =[[DAO sharedManager] createCompanyWithName:self.nameInput.text andLogo:self.logoInput.text andStockSymbol:self.stockSymbolInput.text];
     
     [self.companyVC.tableView reloadData];
+    self.companyVC.editing = FALSE;
+    
     [self.navigationController popViewControllerAnimated:YES];
-
+       
 }
 
 -(void)cancelForm
 {
     [self.navigationController popViewControllerAnimated:YES];
-
 }
 
 
@@ -139,14 +179,11 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)sender
 {
-//    if ([sender isEqual:mailTf])
-    {
         //move the main view, so that the keyboard does not hide it.
         if  (self.view.frame.origin.y >= 0)
         {
             [self setViewMovedUp:YES];
         }
-    }
 }
 
 //method to move the view up/down whenever the keyboard is shown/dismissed

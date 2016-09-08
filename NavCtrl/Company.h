@@ -15,11 +15,8 @@
 @property (strong, nonatomic) NSString *logo;
 @property (strong, nonatomic) NSString *stockSymbol;
 @property (strong, nonatomic) NSString *stockPrice;
+@property (nonatomic) int companyID;
 @property (strong, nonatomic) NSMutableArray *products;
-//-(void)addProductToProducts:(Product *)product;
-
 -(instancetype)initWithName:(NSString *)name andLogo:(NSString *)logo andStockSymbol:(NSString *)stockSymbol;
--(instancetype)initWithName:(NSString *)name andLogo:(NSString *)logo andStockSymbol:(NSString *)stockSymbol andProducts:(NSMutableArray *)products;
-;
 
 @end

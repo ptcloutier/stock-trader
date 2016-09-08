@@ -39,7 +39,7 @@
     self.company = self.passedCompany;
     
     UIBarButtonItem *cancelButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelForm)];
-    UIBarButtonItem *saveButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(productFromInput)];
+    UIBarButtonItem *saveButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(editOrCreateNewProduct)];
     
     self.navigationItem.leftBarButtonItem = cancelButtonItem;
     self.navigationItem.rightBarButtonItem = saveButtonItem;
@@ -47,9 +47,18 @@
     self.productNameInput.delegate = self;
     self.productURLInput.delegate = self;
     self.productImageURLInput.delegate = self;
-    
+    self.title = @"Add Product";
+    if (self.productVC.editProduct == TRUE) {
+        self.title = @"Edit Product";
+        self.productNameInput.text = self.productVC.product.name;
+        self.productURLInput.text = [self.productVC.product.url absoluteString];
+        self.productImageURLInput.text = [self.productVC.product.imageURL absoluteString];
+    }
     
 }
+
+
+
 -(void)textViewShouldReturn:(UITextField *)textField
 {
     if ([textField.text isEqualToString:@""]){
@@ -69,24 +78,51 @@
     // Dispose of any resources that can be recreated.
 }
 
-
--(void)productFromInput
-{
-    
-    
-    Product *product = [[Product alloc]initWithName:self.productNameInput.text andURL:self.productURLInput.text andImageURL:self.productImageURLInput.text];
-
-    if (self.company.products == nil) {
-        self.company.products = [[NSMutableArray alloc]init];
+-(void)editOrCreateNewProduct {
+    if (self.productVC.editProduct == TRUE){
+        [self modifyProductFromInput];
+        self.productVC.editProduct = FALSE;
+    }else{
+        [self isFirstProduct];
     }
-    
-    [self.company.products  addObject:product];
-    
-    
-    [self.productVC.tableView reloadData];
-    [self.navigationController popViewControllerAnimated:YES];
-    
 }
+
+
+-(void)modifyProductFromInput {
+    
+    [[DAO sharedManager] modifyProduct:self.productVC.product productName:self.productNameInput.text andURL:[NSString stringWithFormat:@"%@", self.productURLInput.text] andImageURL:[NSString stringWithFormat:@"%@", self.productImageURLInput.text]];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)isFirstProduct {
+    
+    if(![self.company.products count]){
+        [self createFirstProduct];
+    }else{
+        [self createProductFromInput];
+    }
+}
+
+
+-(void)createFirstProduct {
+    
+    [[DAO sharedManager] createProductWithName:self.productNameInput.text andURL:[NSString stringWithFormat:@"%@", self.productURLInput.text] andImageURL:[NSString stringWithFormat:@"%@", self.productImageURLInput.text]inCompany:self.company];
+    ProductViewController *productViewController = [[ProductViewController alloc]init];
+    productViewController.companyFromView = self.company;
+    [self.navigationController
+     pushViewController:productViewController
+     animated:YES];
+}
+
+
+-(void)createProductFromInput {
+    [[DAO sharedManager] createProductWithName:self.productNameInput.text andURL:[NSString stringWithFormat:@"%@", self.productURLInput.text] andImageURL:[NSString stringWithFormat:@"%@", self.productImageURLInput.text]inCompany:self.company];
+    [self.productVC.tableView reloadData];
+    self.productVC.editing = FALSE;
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 
 -(void)cancelForm
 {
@@ -141,16 +177,12 @@
     }
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)sender
-{
-    //    if ([sender isEqual:mailTf])
-    {
+-(void)textFieldDidBeginEditing:(UITextField *)sender {
         //move the main view, so that the keyboard does not hide it.
         if  (self.view.frame.origin.y >= 0)
         {
             [self setViewMovedUp:YES];
         }
-    }
 }
 
 //method to move the view up/down whenever the keyboard is shown/dismissed

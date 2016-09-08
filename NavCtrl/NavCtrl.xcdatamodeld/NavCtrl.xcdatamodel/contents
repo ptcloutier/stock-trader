@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Xcode 7.0">
+    <entity name="CompanyMO" representedClassName="CompanyMO" syncable="YES">
+        <attribute name="companyID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="logo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="position" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="stockPrice" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stockSymbol" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="productMO" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ProductMO" inverseName="companyMO" inverseEntity="ProductMO" syncable="YES"/>
+    </entity>
+    <entity name="ProductMO" representedClassName="ProductMO" syncable="YES">
+        <attribute name="companyID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="companyMO" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CompanyMO" inverseName="productMO" inverseEntity="CompanyMO" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CompanyMO" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="ProductMO" positionX="108" positionY="-9" width="128" height="120"/>
+    </elements>
+</model>

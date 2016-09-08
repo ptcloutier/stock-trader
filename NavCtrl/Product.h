@@ -10,9 +10,10 @@
 
 @interface Product : NSObject
 
+
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSURL *url;
 @property (strong, nonatomic) NSURL *imageURL;
-
-- (instancetype)initWithName:(NSString *)name andURL:(NSString *)url andImageURL:(NSString *)imageURL;
+@property (nonatomic) int companyID;
+-(instancetype)initWithName:(NSString *)name andURL:(NSString *)url andImageURL:(NSString *)imageURL;
 @end

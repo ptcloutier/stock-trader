@@ -19,6 +19,7 @@
 @property (strong, nonatomic) Company *companyFromView;
 @property (strong, nonatomic) Company *company;
 @property (strong, nonatomic) Product *product;
+@property (nonatomic) BOOL editProduct;
 //@property (strong, nonatomic) NSMutableArray *products;
 //@property (nonatomic, retain) NSArray *companyList;
 @property (strong, nonatomic) WKWebView *webView;

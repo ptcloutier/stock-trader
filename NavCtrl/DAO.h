@@ -14,14 +14,31 @@
 
 @interface DAO : NSObject
 
-@property (strong, nonatomic) NSMutableArray *stockPrices;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
+@property (nonatomic, strong) NSUndoManager *undoManager;
 @property (strong, nonatomic) NSMutableArray *companyList;
-@property (strong, nonatomic) Company *company;
+@property (strong, nonatomic) NSMutableArray *managedObjects; 
+@property (strong, nonatomic) Company *company; 
 @property (strong, nonatomic) NSString *daoDidReceiveStockPricesNotification;
--(void)createCompanies;
--(void)addCompanyToCompanyList:(Company *)company;
--(void)getStockQuotes;
+@property (strong, nonatomic) NSString *undoNotification;
 +(instancetype)sharedManager;
+-(void)firstLaunchCheck;
+-(void)loadCompanies;
+-(BOOL)companiesExist;
+-(Company *)createCompanyWithName:(NSString *)name andLogo:(NSString *)logo andStockSymbol:(NSString *)stockSymbol;
+-(Product *)createProductWithName:(NSString *)name andURL:(NSString *)url andImageURL:(NSString *)imageURL inCompany:(Company *)company;
+-(void)modifyCompany:(Company *)company companyName:(NSString *)name andLogo:(NSString *)logo andStockSymbol:(NSString *)stockSymbol;
+-(void)modifyProduct:(Product *)product productName:(NSString *)name andURL:(NSString *)url andImageURL:(NSString *)imageURL;
+-(void)moveCompanyAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex;
+-(void)moveProductAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex inCompany:(Company *)company;
+-(void)deleteCompany:(Company *)company;
+-(void)deleteProduct:(Product *)product fromCompany:(Company *)company;
+-(void)getStockQuotes;
+-(void)undoAction;
+-(void)redoAction;
+
+
 
 
 @end

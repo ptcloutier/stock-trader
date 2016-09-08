@@ -10,8 +10,7 @@
 
 @implementation Product
 
-- (instancetype)initWithName:(NSString *)name andURL:(NSString *)url andImageURL:(NSString *)imageURL
-{
+- (instancetype)initWithName:(NSString *)name andURL:(NSString *)url andImageURL:(NSString *)imageURL {
     self = [super init];
     if (self) {
         self.name = name;
