@@ -18,6 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //    // if no internet , display alertcontroller with error report
+
     
     self.webConfig = [[WKWebViewConfiguration alloc]init];
     self.webView = [[WKWebView alloc]initWithFrame:[[UIScreen mainScreen]bounds] configuration:self.webConfig];

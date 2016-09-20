@@ -17,11 +17,14 @@
 
 @interface FormViewController : UIViewController <UITextFieldDelegate>
 
+@property (strong, nonatomic) Company *company;
 @property (retain, nonatomic) CompanyViewController *companyVC;
 @property (retain, nonatomic) IBOutlet UITextField *nameInput;
+@property (retain, nonatomic) IBOutlet UITextField *logoInput;
 @property (retain, nonatomic) IBOutlet UITextField *stockSymbolInput;
-
-
-
+@property (retain, nonatomic) IBOutlet UIButton *deleteButton;
+@property(nonatomic) BOOL isEditing;
+- (IBAction)deleteButtonPressed:(id)sender;
+ 
 
  @end

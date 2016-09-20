@@ -15,41 +15,14 @@
     self = [super init];
     if (self) {
         self.name = name;
-        if (logo){
-        self.logo = logo;
-    }
+        self.logoURL = [NSURL URLWithString:logo];
         if (stockSymbol) {
             self.stockSymbol = stockSymbol;
         }
     }
     return self;
 }
-
--(instancetype)initWithName:(NSString *)name andLogo:(NSString *)logo andStockSymbol:(NSString *)stockSymbol andProducts:(NSMutableArray *)products
-
-{
-    self = [super init];
-    if (self) {
-        self.name = name;
-        self.logo = logo;
-        if (stockSymbol) {
-            self.stockSymbol = stockSymbol;
-        }
-        if (products) {
-            self.products = products;
-        } else {
-            self.products = [[NSMutableArray alloc] init];
-        }
-
-    }
-    return self;
-}
-
-//-(void)addProductToProducts:(Product *)product
-//{
-//    
-//        [self.products addObject:product];
-// 
-//}
 
 @end
+
+

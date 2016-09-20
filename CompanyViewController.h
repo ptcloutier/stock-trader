@@ -7,19 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 #import "Company.h"
 #import "Product.h"
 #import "ProductViewController.h"
 #import "FormViewController.h"
 @class ProductViewController;
 
-@interface CompanyViewController : UITableViewController
+@interface CompanyViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong)  NSString *daoDidReceiveStockPricesNotification;
+@property (nonatomic, strong) UIBarButtonItem *barButtonEdit;
+@property (nonatomic, strong) UIBarButtonItem *barButtonAdd;
+@property (nonatomic, strong) NSString *daoDidReceiveStockPricesNotification;
 @property (nonatomic, strong) Company *company;
 @property (nonatomic, retain) NSMutableArray *companyList;
--(void)daoDidReceiveStockPrices:(NSNotification *)notification;
- 
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) IBOutlet UIView *bottomFloatingView; // undo/redo buttons
+@property (nonatomic, retain) UIView *emptyStateView;
+//@property (retain, nonatomic) IBOutlet UIButton *addCompanyButton;
+- (IBAction)addButtonPressed:(id)sender;
+- (void)editButtonPressed;
+
 @end
 
 

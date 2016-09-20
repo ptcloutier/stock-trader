@@ -3,7 +3,13 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[Product downloadImage]:Product.m">
+      </ContextState>
+      <ContextState
          contextName = "-[DAO createCompanyFromUserInput]:DAO.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ProductViewController tableView:cellForRowAtIndexPath:]:ProductViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[FormViewController companyFromInput]:FormViewController.m">
@@ -12,6 +18,26 @@
                value = "">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[Product initWithName:andURL:andImageURL:]:Product.m">
+      </ContextState>
+      <ContextState
+         contextName = "__24-[Product downloadImage]_block_invoke:Product.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[location absoluteString]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ProductViewController setLabelsAndImage]:ProductViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[DAO createProductWithName:andURL:andImageURL:inCompany:]:DAO.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[CompanyViewController chooseView]:CompanyViewController.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

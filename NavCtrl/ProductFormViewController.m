@@ -37,9 +37,10 @@
     // Do any additional setup after loading the view.
     
     self.company = self.passedCompany;
+    self.product = self.passedProduct;
     
     UIBarButtonItem *cancelButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelForm)];
-    UIBarButtonItem *saveButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(productFromInput)];
+    UIBarButtonItem *saveButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(saveProductForm)];
     
     self.navigationItem.leftBarButtonItem = cancelButtonItem;
     self.navigationItem.rightBarButtonItem = saveButtonItem;
@@ -47,22 +48,25 @@
     self.productNameInput.delegate = self;
     self.productURLInput.delegate = self;
     self.productImageURLInput.delegate = self;
-    
-    
+    self.title = @"Add Product";
+    self.deleteButton.hidden = true;
+    if (self.productVC.tableView.editing == true) {
+        self.title = @"Edit Product";
+        self.deleteButton.hidden = false;
+        self.productNameInput.text = self.product.name;
+        self.productURLInput.text = [self.product.url absoluteString];
+        self.productImageURLInput.text = [self.product.imageURL absoluteString];
+    }
 }
+
+
 -(void)textViewShouldReturn:(UITextField *)textField
 {
     if ([textField.text isEqualToString:@""]){
         return;
     }
-    
-    //    UIAlertView *helloEarthInputAlert = [[UIAlertView alloc]
-    //                                         initWithTitle:@"Name!" message:[NSString stringWithFormat:@"Message: %@", textField.text]
-    //                                         delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    //    // Display this message.
-    //    [helloEarthInputAlert show];
-    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -70,50 +74,51 @@
 }
 
 
--(void)productFromInput
+-(void)saveProductForm
 {
-    
-    
-    Product *product = [[Product alloc]initWithName:self.productNameInput.text andURL:self.productURLInput.text andImageURL:self.productImageURLInput.text];
-
-    if (self.company.products == nil) {
-        self.company.products = [[NSMutableArray alloc]init];
+    // choose between edting existing Company or creating a new one from values on the form
+    [self trimBlankSpacesFromInput];
+    if (self.productVC.tableView.editing == true){ //modify product
+        [[DAO sharedManager] modifyProduct:self.product productName:self.productNameInput.text andURL:[NSString stringWithFormat:@"%@", self.productURLInput.text] andImageURL:[NSString stringWithFormat:@"%@", self.productImageURLInput.text]inCompany:self.company];
+        self.deleteButton.hidden = false;
+        [self.productVC editButtonPressed];
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{                              //create new product
+        [[DAO sharedManager] createProductWithName:self.productNameInput.text andURL:[NSString stringWithFormat:@"%@", self.productURLInput.text] andImageURL:[NSString stringWithFormat:@"%@", self.productImageURLInput.text]inCompany:self.company];
+        //    [self.productVC.tableView reloadData];
+        //        [self.productVC.tableView setEditing:false animated:YES];
+        //        [self.productVC editButtonPressed];
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    
-    [self.company.products  addObject:product];
-    
-    
-    [self.productVC.tableView reloadData];
-    [self.navigationController popViewControllerAnimated:YES];
-    
 }
+
+
+-(void)trimBlankSpacesFromInput
+{   // trim any blank leading or trailing spaces in input
+    NSString *tempName = [self.productNameInput.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *tempURL = [self.productURLInput.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *tempImgURL = [self.productImageURLInput.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    self.productNameInput.text = tempName;
+    self.productURLInput.text = tempURL;
+    self.productImageURLInput.text = tempImgURL;
+}
+
+
+
+- (IBAction)deleteButtonPressed:(id)sender
+{
+    [[DAO sharedManager]deleteProduct:self.product fromCompany:self.company];
+    [self.productVC editButtonPressed];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 -(void)cancelForm
 {
+    [self.productVC editButtonPressed];
     [self.navigationController popViewControllerAnimated:YES];
     
 }
-
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
-- (void)dealloc {
-    
-    [_productNameInput release];
-    [_productURLInput release];
-    [_productImageURLInput release];
-    [super dealloc];
-}
-
-
 
 
 #define kOFFSET_FOR_KEYBOARD 80.0
@@ -141,16 +146,12 @@
     }
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)sender
-{
-    //    if ([sender isEqual:mailTf])
-    {
+-(void)textFieldDidBeginEditing:(UITextField *)sender {
         //move the main view, so that the keyboard does not hide it.
         if  (self.view.frame.origin.y >= 0)
         {
             [self setViewMovedUp:YES];
         }
-    }
 }
 
 //method to move the view up/down whenever the keyboard is shown/dismissed
@@ -191,4 +192,15 @@
                                                     name:UIKeyboardWillHideNotification
                                                   object:nil];
 }
+
+
+- (void)dealloc {
+    
+    [_productNameInput release];
+    [_productURLInput release];
+    [_productImageURLInput release];
+    [_deleteButton release];
+    [super dealloc];
+}
+
 @end
