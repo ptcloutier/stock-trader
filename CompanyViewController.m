@@ -22,6 +22,23 @@
 
 
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self chooseView];
+    [self.dao getStockQuotes];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadTableAfterNotification:)
+                                                 name:@"daoDidReceiveStockPricesNotification"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadTableAfterNotification:)
+                                                 name:@"imageDownloaded"
+                                               object:nil];
+    [self.tableView reloadData];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -47,24 +64,39 @@
 }
 
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [self chooseView];
-    [self.dao getStockQuotes];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableAfterNotification:)
-                                                 name:@"daoDidReceiveStockPricesNotification"
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableAfterNotification:)
-                                                 name:@"imageDownloaded"
-                                               object:nil];
-    [self.tableView reloadData];
-}
-
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - Add/Edit Companies
+
+- (IBAction)addButtonPressed:(id)sender
+{   //  show the form to add a new company
+    FormViewController *formViewController = [[FormViewController alloc]initWithNibName: @"FormViewController" bundle: nil];
+    formViewController.companyVC = self;
+    [self.navigationController pushViewController:formViewController animated:YES];
+    [formViewController release];
+}
+
+
+-(void)editButtonPressed
+{   // toggles Edit and Done on nav bar button
+    if([self.barButtonEdit.title isEqualToString: @"Edit"]) {
+        [self.tableView setEditing:true animated:YES];
+        self.barButtonEdit.title = @"Done";
+        self.barButtonAdd.enabled = false;
+        self.barButtonAdd.title = @"";
+        [self showUndoRedoButtons];
+    }else{
+        self.barButtonEdit.title = @"Edit";
+        [self.tableView setEditing:false animated:YES];
+        self.barButtonAdd.enabled = true;
+        self.barButtonAdd.title = @"+";
+        [self hideUndoRedoButtons];
+    }
 }
 
 
@@ -93,32 +125,6 @@
 }
 
 
--(void)editButtonPressed
-{   // toggles Edit and Done on nav bar button
-    if([self.barButtonEdit.title isEqualToString: @"Edit"]) {
-        [self.tableView setEditing:true animated:YES];
-        self.barButtonEdit.title = @"Done";
-        self.barButtonAdd.enabled = false;
-        self.barButtonAdd.title = @"";
-        [self showUndoRedoButtons];
-    }else{
-        self.barButtonEdit.title = @"Edit";
-        [self.tableView setEditing:false animated:YES];
-        self.barButtonAdd.enabled = true;
-        self.barButtonAdd.title = @"+";
-        [self hideUndoRedoButtons];
-    }
-}
-
-
-- (IBAction)addButtonPressed:(id)sender
-{   //  show the form to add a new company
-    FormViewController *formViewController = [[FormViewController alloc]initWithNibName: @"FormViewController" bundle: nil];
-    formViewController.companyVC = self;
-    [self.navigationController pushViewController:formViewController animated:YES];
-}
-
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -142,7 +148,7 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     // Configure the cell...
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -189,7 +195,8 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source, reset Edit nav bar button and check that tableView is not empty (chooseView)
-        [self.dao deleteCompany:[self.companyList objectAtIndex:indexPath.row]];
+        Company *company = [self.companyList objectAtIndex:indexPath.row];
+        [self.dao deleteCompany:company];
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         if(self.tableView.editing == true){
             [self editButtonPressed];
@@ -228,6 +235,7 @@
         formViewController.company = [self.companyList objectAtIndex:indexPath.row];
         formViewController.isEditing = true;
         [self.navigationController pushViewController:formViewController animated:YES];
+        [formViewController release];
     } else {
         //show the Companys' products
         Company *company = [self.companyList objectAtIndex:[indexPath row]];
@@ -236,6 +244,7 @@
         [self.navigationController
          pushViewController:productViewController
          animated:YES];
+        [productViewController release];
     }
 }
 
@@ -307,7 +316,9 @@
     [undoButton setBackgroundColor:[UIColor blackColor]];
     
     // create view to hold buttons
-    self.bottomFloatingView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenRect.size.width, 100)];
+    UIView *bview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenRect.size.width, 100)];
+    self.bottomFloatingView = bview;
+    [bview release];
     [self.bottomFloatingView addSubview:redoButton];
     [self.bottomFloatingView addSubview:undoButton];
     [self.tableView addSubview:self.bottomFloatingView];
@@ -321,7 +332,7 @@
                         context:NULL];
     
     self.bottomFloatingView.hidden = YES;
-}
+ }
 
 
 #pragma mark - UIScrollViewDelegate

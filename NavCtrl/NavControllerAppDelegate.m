@@ -27,19 +27,23 @@
     [self.dao firstLaunchCheck];        // check for first launch, if first load hard-coded companies, else load from core data
 
    CompanyViewController *rootController = [[CompanyViewController alloc]initWithNibName: @"CompanyViewController" bundle: nil];
-    self.navigationController = [[UINavigationController alloc]
+     UINavigationController *navctrl = [[UINavigationController alloc]
                                  initWithRootViewController:rootController];
-    
+    self.navigationController = navctrl;
+    [rootController release];
+    [navctrl release];
     UIColor *green = [UIColor colorWithRed:109.0/255.0 green:169.0/255.0 blue:44.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.barTintColor = green;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
-    self.window = [[UIWindow alloc]
+    UIWindow *window = [[UIWindow alloc]
                    initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window = window;
+    [window release];
     [self.window setRootViewController:self.navigationController];
     [self.window makeKeyAndVisible];
-    return YES;
+     return YES;
 }
 
 
@@ -179,6 +183,8 @@
         }
     }
 }
+
+
 
 
 

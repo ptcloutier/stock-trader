@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *position;
 @property (nullable, nonatomic, retain) NSString *stockPrice;
 @property (nullable, nonatomic, retain) NSString *stockSymbol;
-@property (nullable, nonatomic, retain) NSSet<ProductMO *> *productMO;
+@property (nullable, nonatomic, retain) NSSet<ProductMO *> *productsMO;
 
 @end
 

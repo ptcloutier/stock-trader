@@ -3,24 +3,30 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[Product downloadImage]:Product.m">
+         contextName = "-[ProductViewController setLabelsAndImage]:ProductViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[DAO createCompanyFromUserInput]:DAO.m">
       </ContextState>
       <ContextState
-         contextName = "-[ProductViewController tableView:cellForRowAtIndexPath:]:ProductViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[FormViewController companyFromInput]:FormViewController.m">
+         contextName = "-[DAO createCompaniesAndProductsFromManagedObjects]:DAO.m">
          <PersistentStrings>
             <PersistentString
-               value = "">
+               value = "companyMO.productMO">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[Product initWithName:andURL:andImageURL:]:Product.m">
+         contextName = "-[DAO createProductWithName:andURL:andImageURL:inCompany:]:DAO.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[DAO modifyProduct:productName:andURL:andImageURL:inCompany:]:DAO.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[CompanyViewController chooseView]:CompanyViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[Product downloadImage]:Product.m">
       </ContextState>
       <ContextState
          contextName = "__24-[Product downloadImage]_block_invoke:Product.m">
@@ -31,13 +37,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ProductViewController setLabelsAndImage]:ProductViewController.m">
+         contextName = "-[DAO createCompanyWithName:andLogo:andStockSymbol:]:DAO.m">
       </ContextState>
       <ContextState
-         contextName = "-[DAO createProductWithName:andURL:andImageURL:inCompany:]:DAO.m">
+         contextName = "-[Product initWithName:andURL:andImageURL:]:Product.m">
       </ContextState>
       <ContextState
-         contextName = "-[CompanyViewController chooseView]:CompanyViewController.m">
+         contextName = "-[DAO getImageForProduct:inCompany:]:DAO.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[FormViewController companyFromInput]:FormViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

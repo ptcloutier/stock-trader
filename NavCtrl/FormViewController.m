@@ -9,25 +9,10 @@
 #import "FormViewController.h"
 
 @interface FormViewController ()
- 
+
 @end
 
 @implementation FormViewController
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    // register for keyboard notifications, will move up textfields if keyboard rises into view
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
-}
 
 
 - (void)viewDidLoad {
@@ -38,13 +23,15 @@
     UIBarButtonItem *saveButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(saveForm)];
     
     self.navigationItem.leftBarButtonItem = cancelButtonItem;
+    [cancelButtonItem release];
     self.navigationItem.rightBarButtonItem = saveButtonItem;
+    [saveButtonItem release];
     self.nameInput.delegate = self;
     self.stockSymbolInput.delegate = self;
     self.logoInput.delegate = self;
     self.title = @"New Company";
     self.deleteButton.hidden = true;
- 
+    
     if (self.isEditing == TRUE) {
         self.deleteButton.hidden = false;
         self.title = @"Edit Company";
@@ -52,6 +39,9 @@
         self.logoInput.text = [self.company.logoURL absoluteString];
         self.stockSymbolInput.text = self.company.stockSymbol;
     }
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+    [tap release];
 }
 
 
@@ -73,7 +63,7 @@
         [self.navigationController popViewControllerAnimated:YES];
     }else{
         //create company from input
-        self.company =[[DAO sharedManager] createCompanyWithName:self.nameInput.text andLogo:self.logoInput.text andStockSymbol:self.stockSymbolInput.text];
+        [[DAO sharedManager]createCompanyWithName:self.nameInput.text andLogo:self.logoInput.text andStockSymbol:self.stockSymbolInput.text];
         [self.companyVC.tableView setEditing:false animated:YES];
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -102,7 +92,7 @@
 -(void)cancelForm
 {
     if (self.isEditing == true){
-    [self.companyVC editButtonPressed];
+        [self.companyVC editButtonPressed];
     }else{
         [self.companyVC.tableView setEditing:false];
     }
@@ -110,81 +100,64 @@
 }
 
 
-#define kOFFSET_FOR_KEYBOARD 80.0
-// move textfield up if keyboard rises into view 
-
--(void)keyboardWillShow {
-    // Animate the current view out of the way
-    if (self.view.frame.origin.y >= 0)
-    {
-        [self setViewMovedUp:YES];
-    }
-    else if (self.view.frame.origin.y < 0)
-    {
-        [self setViewMovedUp:NO];
-    }
-}
-
-
--(void)keyboardWillHide {
-    if (self.view.frame.origin.y >= 0)
-    {
-        [self setViewMovedUp:YES];
-    }
-    else if (self.view.frame.origin.y < 0)
-    {
-        [self setViewMovedUp:NO];
-    }
-}
+#define kOFFSET_FOR_KEYBOARD 90.0
+// move textfield up if keyboard rises into view
 
 
 -(void)textFieldDidBeginEditing:(UITextField *)sender
 {
-        //move the main view, so that the keyboard does not hide it.
-        if  (self.view.frame.origin.y >= 0)
-        {
-            [self setViewMovedUp:YES];
-        }
+    
+    //move the main view, so that the keyboard does not hide it.
+    if (!self.textFieldsAreUp){
+        
+        [self moveView:@"up"];
+        self.textFieldsAreUp = true;
+    }
+}
+
+
+-(void)dismissKeyboard
+{
+    if (self.textFieldsAreUp){
+        
+        [self moveView:@"down"];
+        [self.nameInput resignFirstResponder];
+        [self.stockSymbolInput resignFirstResponder];
+        [self.logoInput resignFirstResponder];
+    }
+}
+
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (self.textFieldsAreUp){
+        [self moveView:@"down"];
+    }
 }
 
 
 //method to move the view up/down whenever the keyboard is shown/dismissed
--(void)setViewMovedUp:(BOOL)movedUp
+-(void)moveView:(NSString *)direction
 {
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3]; // if you want to slide up the view
     
     CGRect rect = self.view.frame;
-    if (movedUp)
-    {
+    if ([direction isEqualToString:@"up"]){
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
         rect.origin.y -= kOFFSET_FOR_KEYBOARD;
         rect.size.height += kOFFSET_FOR_KEYBOARD;
-    }
-    else
-    {
+        self.textFieldsAreUp = true;
+    }else{
         // revert back to the normal state.
         rect.origin.y += kOFFSET_FOR_KEYBOARD;
         rect.size.height -= kOFFSET_FOR_KEYBOARD;
+        self.textFieldsAreUp = false;
     }
     self.view.frame = rect;
     
     [UIView commitAnimations];
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    // unregister for keyboard notifications while not visible.
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
-                                                  object:nil];
 }
 
 

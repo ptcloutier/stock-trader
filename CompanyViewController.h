@@ -22,7 +22,7 @@
 @property (nonatomic, strong) Company *company;
 @property (nonatomic, retain) NSMutableArray *companyList;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) IBOutlet UIView *bottomFloatingView; // undo/redo buttons
+@property (nonatomic, retain) UIView *bottomFloatingView; // undo/redo buttons
 @property (nonatomic, retain) UIView *emptyStateView;
 //@property (retain, nonatomic) IBOutlet UIButton *addCompanyButton;
 - (IBAction)addButtonPressed:(id)sender;

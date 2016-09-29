@@ -19,6 +19,7 @@
 
 @property (strong, nonatomic) Company *company;
 @property (retain, nonatomic) CompanyViewController *companyVC;
+@property (nonatomic) BOOL textFieldsAreUp;
 @property (retain, nonatomic) IBOutlet UITextField *nameInput;
 @property (retain, nonatomic) IBOutlet UITextField *logoInput;
 @property (retain, nonatomic) IBOutlet UITextField *stockSymbolInput;

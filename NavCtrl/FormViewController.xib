@@ -25,20 +25,14 @@
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stock Symbol" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3st-Lo-uEM">
-                    <rect key="frame" x="75" y="285" width="450" height="30"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Logo" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vgt-hR-GOy">
-                    <rect key="frame" x="75" y="384" width="450" height="30"/>
+                    <rect key="frame" x="75" y="365" width="450" height="30"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNh-PB-bb6">
-                    <rect key="frame" x="270" y="467" width="60" height="36"/>
+                    <rect key="frame" x="270" y="448" width="60" height="36"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                     <state key="normal" title="Delete">
                         <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -47,13 +41,19 @@
                         <action selector="deleteButtonPressed:" destination="-1" eventType="touchUpInside" id="5W5-zN-Cx9"/>
                     </connections>
                 </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Stock Symbol" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3st-Lo-uEM">
+                    <rect key="frame" x="75" y="278" width="450" height="30"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="vgt-hR-GOy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="1iz-Pn-nth"/>
                 <constraint firstItem="3st-Lo-uEM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="2hS-lR-KfM"/>
                 <constraint firstItem="4d8-w2-yCw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="35F-11-rAL"/>
-                <constraint firstItem="3st-Lo-uEM" firstAttribute="top" secondItem="4d8-w2-yCw" secondAttribute="bottom" constant="69" id="Efx-R7-oca"/>
+                <constraint firstItem="3st-Lo-uEM" firstAttribute="top" secondItem="4d8-w2-yCw" secondAttribute="bottom" constant="62" id="Efx-R7-oca"/>
                 <constraint firstItem="vgt-hR-GOy" firstAttribute="height" secondItem="3st-Lo-uEM" secondAttribute="height" id="L1H-8R-NlT"/>
                 <constraint firstItem="vgt-hR-GOy" firstAttribute="width" secondItem="3st-Lo-uEM" secondAttribute="width" id="N4x-Kx-kfM"/>
                 <constraint firstItem="3st-Lo-uEM" firstAttribute="height" secondItem="4d8-w2-yCw" secondAttribute="height" id="PDq-CK-cao"/>
@@ -61,7 +61,7 @@
                 <constraint firstItem="4d8-w2-yCw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="186" id="sXv-8f-N1d"/>
                 <constraint firstItem="4d8-w2-yCw" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="3:4" id="tWJ-eB-94s"/>
                 <constraint firstItem="3st-Lo-uEM" firstAttribute="width" secondItem="4d8-w2-yCw" secondAttribute="width" id="tq7-9o-E7O"/>
-                <constraint firstItem="vgt-hR-GOy" firstAttribute="top" secondItem="3st-Lo-uEM" secondAttribute="bottom" constant="69" id="w3c-DS-3iz"/>
+                <constraint firstItem="vgt-hR-GOy" firstAttribute="top" secondItem="3st-Lo-uEM" secondAttribute="bottom" constant="57" id="w3c-DS-3iz"/>
                 <constraint firstItem="hNh-PB-bb6" firstAttribute="top" secondItem="vgt-hR-GOy" secondAttribute="bottom" constant="53" id="yN8-sk-X55"/>
             </constraints>
         </view>

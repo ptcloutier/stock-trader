@@ -18,7 +18,7 @@
 
 @property (strong, nonatomic) Company *companyFromView;
 @property (strong, nonatomic) Company *company;
-@property (strong, nonatomic) Product *product;
+//@property (strong, nonatomic) Product *product;
 @property (strong, nonatomic) UIImageView *logoView;
 @property (retain, nonatomic) UILabel *nameAndStockSymbol;
 @property (retain, nonatomic) IBOutlet UIView *bottomFloatingView;

@@ -17,8 +17,8 @@
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSUndoManager *undoManager;
 @property (strong, nonatomic) NSMutableArray *companyList;
-@property (strong, nonatomic) NSMutableArray *managedObjects; 
-@property (strong, nonatomic) Company *company; 
+@property (retain, nonatomic) NSMutableArray *managedObjects;
+//@property (strong, nonatomic) Company *company; 
 @property (strong, nonatomic) NSString *daoDidReceiveStockPricesNotification;
 @property (strong, nonatomic) NSString *imagesDownloadedNotification;
 @property (strong, nonatomic) NSString *undoNotification;
@@ -27,7 +27,7 @@
 -(void)firstLaunchCheck;
 -(void)loadCompanies;
 -(Company *)createCompanyWithName:(NSString *)name andLogo:(NSString *)logo andStockSymbol:(NSString *)stockSymbol;
--(Product *)createProductWithName:(NSString *)name andURL:(NSString *)url andImageURL:(NSString *)imageURL inCompany:(Company *)company;
+-(void)createProductWithName:(NSString *)name andURL:(NSString *)url andImageURL:(NSString *)imageURL inCompany:(Company *)company;
 -(void)modifyCompany:(Company *)company companyName:(NSString *)name andLogo:(NSString *)logo andStockSymbol:(NSString *)stockSymbol;
 -(void)modifyProduct:(Product *)product productName:(NSString *)name andURL:(NSString *)url andImageURL:(NSString *)imageURL inCompany:(Company *)company;
 -(void)moveCompanyAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex;

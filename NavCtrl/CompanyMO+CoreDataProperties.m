@@ -19,6 +19,6 @@
 @dynamic position;
 @dynamic stockPrice;
 @dynamic stockSymbol;
-@dynamic productMO;
+@dynamic productsMO;
 
 @end

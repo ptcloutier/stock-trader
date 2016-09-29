@@ -16,13 +16,22 @@
     if (self) {
         self.name = name;
         self.logoURL = [NSURL URLWithString:logo];
-        if (stockSymbol) {
-            self.stockSymbol = stockSymbol;
-        }
+        self.stockSymbol = stockSymbol;
     }
     return self;
 }
 
-@end
 
+- (void)dealloc {
+    [_name release];
+    [_logoURL release];
+    [_stockSymbol release];
+    [_stockPrice release];
+    [_imagePath release];
+    [_products release];
+    [super dealloc];
+}
+
+
+@end
 

@@ -19,14 +19,8 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product URL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lto-JI-cdX">
-                    <rect key="frame" x="75" y="285" width="450" height="30"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Image URL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hfl-hB-LaD">
-                    <rect key="frame" x="75" y="384" width="450" height="30"/>
+                    <rect key="frame" x="75" y="354" width="450" height="30"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                     <textInputTraits key="textInputTraits"/>
@@ -38,7 +32,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3M3-ni-aDr">
-                    <rect key="frame" x="270" y="475" width="60" height="36"/>
+                    <rect key="frame" x="270" y="445" width="60" height="36"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                     <state key="normal" title="Delete">
                         <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -47,6 +41,12 @@
                         <action selector="deleteButtonPressed:" destination="-1" eventType="touchUpInside" id="GiB-n0-67d"/>
                     </connections>
                 </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product URL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lto-JI-cdX">
+                    <rect key="frame" x="75" y="267" width="450" height="30"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -61,8 +61,8 @@
                 <constraint firstItem="Hfl-hB-LaD" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Wnd-Uq-nfo"/>
                 <constraint firstItem="SF3-5y-WMV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hcY-XJ-elB"/>
                 <constraint firstItem="Lto-JI-cdX" firstAttribute="height" secondItem="SF3-5y-WMV" secondAttribute="height" id="lvL-rJ-Ha0"/>
-                <constraint firstItem="Hfl-hB-LaD" firstAttribute="top" secondItem="Lto-JI-cdX" secondAttribute="bottom" constant="69" id="tKb-wX-Xhy"/>
-                <constraint firstItem="Lto-JI-cdX" firstAttribute="top" secondItem="SF3-5y-WMV" secondAttribute="bottom" constant="69" id="zZE-Qj-4BT"/>
+                <constraint firstItem="Hfl-hB-LaD" firstAttribute="top" secondItem="Lto-JI-cdX" secondAttribute="bottom" constant="57" id="tKb-wX-Xhy"/>
+                <constraint firstItem="Lto-JI-cdX" firstAttribute="top" secondItem="SF3-5y-WMV" secondAttribute="bottom" constant="51" id="zZE-Qj-4BT"/>
             </constraints>
             <point key="canvasLocation" x="249" y="228"/>
         </view>

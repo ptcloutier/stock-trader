@@ -24,4 +24,13 @@
     return self;
 }
 
+-(void)dealloc
+{
+    [_name release];
+    [_url release];
+    [_imageURL release];
+    [_imagePath release];
+    [super dealloc];
+}
+
 @end

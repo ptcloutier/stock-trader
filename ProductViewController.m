@@ -43,9 +43,12 @@
     self.company = self.companyFromView;
     self.title = self.company.name;
     
-    self.barButtonEdit = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonPressed)];
-    self.barButtonEdit.title = @"Edit";
-    self.barButtonAdd = [[UIBarButtonItem alloc]initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(addProducts:)];
+    UIBarButtonItem *bbedit = [[UIBarButtonItem alloc]initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonPressed)];
+    self.barButtonEdit = bbedit;
+    [bbedit release];
+     UIBarButtonItem *bbadd = [[UIBarButtonItem alloc]initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(addProducts:)];
+    self.barButtonAdd = bbadd;
+    [bbadd release];
     self.navigationItem.rightBarButtonItems = @[self.barButtonAdd, self.barButtonEdit];
     self.emptyProductsView = [[[NSBundle mainBundle]loadNibNamed:@"EmptyProductsView" owner:self options:nil]firstObject];
     self.emptyProductsView.frame = self.view.frame;
@@ -63,6 +66,9 @@
 }
 
 
+#pragma mark - Add/Edit Products
+
+
 - (IBAction)addProducts:(id)sender
 {
     NSLog(@"add products button touched!");
@@ -71,6 +77,7 @@
     productFormViewController.productVC = self;
     productFormViewController.passedCompany = self.company;
     [self.navigationController pushViewController:productFormViewController animated:YES];
+    [productFormViewController release];
 }
 
 
@@ -90,7 +97,6 @@
         [self hideUndoRedoButtons];
     }
 }
-
 
 
 -(void)chooseView
@@ -115,6 +121,19 @@
 }
 
 
+-(void)refreshProducts
+{
+     for (Company *temp in self.dao.companyList) {
+        if(temp.companyID == self.company.companyID){
+            self.company = temp;
+        }
+    }
+}
+
+
+#pragma mark - Table view Header
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return self.tableView.bounds.size.height * 0.28;
@@ -130,11 +149,13 @@
     UIGraphicsBeginImageContext(itemSize);
     CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
     [image drawInRect:imageRect];
-    self.logoView = [[UIImageView alloc]initWithImage:UIGraphicsGetImageFromCurrentImageContext()];
+    UIImageView *imgv= [[UIImageView alloc]initWithImage:UIGraphicsGetImageFromCurrentImageContext()];
     UIGraphicsEndImageContext();
+    self.logoView = imgv;
+    [imgv release];
     
     // create headerView with the same width as the tableView and a little taller than the image
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, self.tableView.bounds.size.height/5)];
+    UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, self.tableView.bounds.size.height/5)] autorelease];
     headerView.backgroundColor =[UIColor blackColor];
 
     // Now center it and add it to headerView a little below center of headerView
@@ -147,10 +168,13 @@
 //    CGPoint headerCenter = CGPointMake(CGRectGetMidX([headerView bounds]), CGRectGetMidY([headerView bounds]));
 //    self.logoView.center = [headerView convertPoint:headerView.center fromView:headerView.superview];
     [self.tableView addSubview:headerView];
-    [headerView addSubview: [self.logoView autorelease]];
+    [headerView addSubview: self.logoView];
     
     //create label
-    self.nameAndStockSymbol = [[UILabel alloc] initWithFrame:CGRectMake(0, self.tableView.bounds.size.height/5, self.tableView.bounds.size.width, 30)];
+    UILabel *label = [[UILabel alloc]init];
+    label.frame = CGRectMake(0, self.tableView.bounds.size.height/5, self.tableView.bounds.size.width, 30);
+    self.nameAndStockSymbol = label;
+    [label release];
     self.nameAndStockSymbol.textAlignment = NSTextAlignmentCenter;
     if([self.company.stockSymbol isEqual: @""]){
         self.nameAndStockSymbol.text = self.company.name;
@@ -160,14 +184,13 @@
     self.nameAndStockSymbol.textColor = [UIColor whiteColor];
     [self.logoView addSubview:self.nameAndStockSymbol];
 
-    [headerView addSubview: [self.nameAndStockSymbol autorelease]];
+    [headerView addSubview: self.nameAndStockSymbol];
 
-    return [headerView autorelease];
+    return headerView;
 }
 
 
 #pragma mark - Table view data source
-
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -195,13 +218,12 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier]autorelease];
     }
     // Configure the cell...
     cell.imageView.frame = CGRectMake(0,0,32,32);
 
-    Product *product = [[Product alloc]init];
-    product =  [[self.company products]objectAtIndex:indexPath.row];
+    Product *product =  [[self.company products]objectAtIndex:[indexPath row]];
     cell.textLabel.text = product.name ;
     NSData *data = [NSData dataWithContentsOfFile:product.imagePath];
     if(data == nil){                 // if data at image path is nil, do not attempt to show image
@@ -217,7 +239,7 @@
         }
     return cell;
 }
-
+ 
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -230,6 +252,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.dao deleteProduct:[self.company.products objectAtIndex:indexPath.row]fromCompany:self.company];
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
         if(self.tableView.editing == true){
             [self editButtonPressed];
         }
@@ -266,13 +289,15 @@
         productFormViewController.productVC.editing = true;
         productFormViewController.passedCompany = self.company;
         [self.navigationController pushViewController:productFormViewController animated:YES];
+        [productFormViewController release];
     } else {
-        self.webViewController = [[WebViewController alloc]initWithNibName:@"WebViewController" bundle:nil];
+        WebViewController *webVC = [[WebViewController alloc]init];
+//                                    initWithNibName:@"WebViewController" bundle:nil];
         Product *product = [self.company.products objectAtIndex:indexPath.row];
-        self.webViewController.url = product.url;
-        [self.navigationController pushViewController:self.webViewController animated:YES];
-        [self.webViewController release];
-    }
+        webVC.url = product.url;
+        [self.navigationController pushViewController:webVC animated:YES];
+        [webVC release];
+     }
 }
 
 
@@ -300,9 +325,10 @@
     [self.dao undoAction];
     NSLog(@"UNDO_PRESSED");
     [self editButtonPressed];
+    [self refreshProducts];
     [self chooseView];
     [self.tableView reloadData];
-}
+ }
 
 
 -(void)redoPressed
@@ -310,6 +336,7 @@
     [self.dao redoAction];
     NSLog(@"REDO_PRESSED");
     [self editButtonPressed];
+    [self refreshProducts];
     [self chooseView];
     [self.tableView reloadData];
 }
@@ -318,7 +345,7 @@
 -(void)makeUndoRedoButtons
 {
     //create left button for Redo
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGRect screenRect = [[UIScreen mainScreen]bounds];
     UIButton *redoButton =[UIButton buttonWithType:UIButtonTypeCustom];
     redoButton.frame = CGRectMake(0, 0, screenRect.size.width/2, 100);
     redoButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -339,7 +366,9 @@
     [undoButton setBackgroundColor:[UIColor blackColor]];
     
     //create view to hold buttons
-    self.bottomFloatingView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenRect.size.width, 100)];
+    UIView *bview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, screenRect.size.width, 100)];
+    self.bottomFloatingView = bview;
+    [bview release];
     [self.bottomFloatingView addSubview:redoButton];
     [self.bottomFloatingView addSubview:undoButton];
     [self.tableView addSubview:self.bottomFloatingView];
@@ -407,6 +436,11 @@
     [_emptyCompanyName release];
     [_emptyHeaderView release];
     [_emptyProductsView release];
+    [_barButtonAdd release];
+    [_barButtonEdit release];
+    [_company release];
+    [_companyFromView release];
+    
     [super dealloc];
 }
 @end
