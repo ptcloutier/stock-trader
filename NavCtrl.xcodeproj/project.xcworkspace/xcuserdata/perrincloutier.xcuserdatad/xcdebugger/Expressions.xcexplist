@@ -3,7 +3,47 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[ProductViewController setLabelsAndImage]:ProductViewController.m">
+      </ContextState>
+      <ContextState
          contextName = "-[DAO createCompanyFromUserInput]:DAO.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[DAO createCompaniesAndProductsFromManagedObjects]:DAO.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "companyMO.productMO">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DAO createProductWithName:andURL:andImageURL:inCompany:]:DAO.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[DAO modifyProduct:productName:andURL:andImageURL:inCompany:]:DAO.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[CompanyViewController chooseView]:CompanyViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[Product downloadImage]:Product.m">
+      </ContextState>
+      <ContextState
+         contextName = "__24-[Product downloadImage]_block_invoke:Product.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[location absoluteString]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DAO createCompanyWithName:andLogo:andStockSymbol:]:DAO.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[Product initWithName:andURL:andImageURL:]:Product.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[DAO getImageForProduct:inCompany:]:DAO.m">
       </ContextState>
       <ContextState
          contextName = "-[FormViewController companyFromInput]:FormViewController.m">

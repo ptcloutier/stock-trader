@@ -8,9 +8,8 @@
 
 #import "WebViewController.h"
 #import <WebKit/WebKit.h>
+
 @interface WebViewController ()
-@property (retain, nonatomic) IBOutlet WKWebView *webView;
-@property (strong, nonatomic) WKWebViewConfiguration *webConfig;
 
 @end
 
@@ -18,37 +17,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //    // if no internet , display alertcontroller with error report
+    //[UIAlertController
     
-    self.webConfig = [[WKWebViewConfiguration alloc]init];
-    self.webView = [[WKWebView alloc]initWithFrame:[[UIScreen mainScreen]bounds] configuration:self.webConfig];
-    
-    self.view = self.webView;
-    [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
-}
+//    WKWebViewConfiguration *webConfig = [[WKWebViewConfiguration  alloc]init];
+    WKWebView *webView = [[WKWebView alloc]init];
+    webView.frame = self.view.bounds;
+//                          WithFrame:self.view.bounds configuration:webConfig];
+//    [webConfig release];
+    [webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    [self.view addSubview:webView];
 
+  
+    [webView release];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-//- (void)return:(id)sender {//doesnt work yet
-//    
-//    
-//    [self.navigationController popToRootViewControllerAnimated:YES];
-//    
-//}
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (void)dealloc {
-    [_webView release];
+    [_url release];
     [super dealloc];
 }
 @end

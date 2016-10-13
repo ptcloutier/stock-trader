@@ -15,41 +15,23 @@
     self = [super init];
     if (self) {
         self.name = name;
-        if (logo){
-        self.logo = logo;
-    }
-        if (stockSymbol) {
-            self.stockSymbol = stockSymbol;
-        }
+        self.logoURL = [NSURL URLWithString:logo];
+        self.stockSymbol = stockSymbol;
     }
     return self;
 }
 
--(instancetype)initWithName:(NSString *)name andLogo:(NSString *)logo andStockSymbol:(NSString *)stockSymbol andProducts:(NSMutableArray *)products
 
-{
-    self = [super init];
-    if (self) {
-        self.name = name;
-        self.logo = logo;
-        if (stockSymbol) {
-            self.stockSymbol = stockSymbol;
-        }
-        if (products) {
-            self.products = products;
-        } else {
-            self.products = [[NSMutableArray alloc] init];
-        }
-
-    }
-    return self;
+- (void)dealloc {
+    [_name release];
+    [_logoURL release];
+    [_stockSymbol release];
+    [_stockPrice release];
+    [_imagePath release];
+    [_products release];
+    [super dealloc];
 }
 
-//-(void)addProductToProducts:(Product *)product
-//{
-//    
-//        [self.products addObject:product];
-// 
-//}
 
 @end
+

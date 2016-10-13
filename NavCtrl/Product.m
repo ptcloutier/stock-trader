@@ -5,7 +5,6 @@
 //  Created by perrin cloutier on 7/19/16.
 //  Copyright © 2016 Aditya Narayan. All rights reserved.
 //
-
 #import "Product.h"
 
 @implementation Product
@@ -16,12 +15,22 @@
     if (self) {
         self.name = name;
         if (url){
-        self.url = [NSURL URLWithString:url];
+            self.url = [NSURL URLWithString:url]; //download image to url and save file
         }
         if(imageURL){
-        self.imageURL = [NSURL URLWithString:imageURL];
+            self.imageURL = [NSURL URLWithString:imageURL];
         }
     }
     return self;
 }
+
+-(void)dealloc
+{
+    [_name release];
+    [_url release];
+    [_imageURL release];
+    [_imagePath release];
+    [super dealloc];
+}
+
 @end

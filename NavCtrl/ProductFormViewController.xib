@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductFormViewController">
             <connections>
+                <outlet property="deleteButton" destination="3M3-ni-aDr" id="sap-BP-ToK"/>
                 <outlet property="productImageURLInput" destination="Hfl-hB-LaD" id="ynF-vD-ojp"/>
                 <outlet property="productNameInput" destination="SF3-5y-WMV" id="zSw-EI-aFo"/>
                 <outlet property="productURLInput" destination="Lto-JI-cdX" id="tSo-0O-eOf"/>
@@ -19,20 +19,30 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SF3-5y-WMV">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Image URL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hfl-hB-LaD">
+                    <rect key="frame" x="75" y="354" width="450" height="30"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SF3-5y-WMV">
                     <rect key="frame" x="75" y="186" width="450" height="30"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lto-JI-cdX">
-                    <rect key="frame" x="75" y="285" width="450" height="30"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3M3-ni-aDr">
+                    <rect key="frame" x="270" y="445" width="60" height="36"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product Image URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hfl-hB-LaD">
-                    <rect key="frame" x="75" y="384" width="450" height="30"/>
+                    <state key="normal" title="Delete">
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="deleteButtonPressed:" destination="-1" eventType="touchUpInside" id="GiB-n0-67d"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Product URL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lto-JI-cdX">
+                    <rect key="frame" x="75" y="267" width="450" height="30"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                     <textInputTraits key="textInputTraits"/>
@@ -40,18 +50,21 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="3M3-ni-aDr" firstAttribute="top" secondItem="Hfl-hB-LaD" secondAttribute="bottom" constant="61" id="27z-0p-Ki7"/>
                 <constraint firstItem="SF3-5y-WMV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="186" id="4fA-cT-ws7"/>
                 <constraint firstItem="SF3-5y-WMV" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="3:4" id="DXZ-TN-nFX"/>
                 <constraint firstItem="Lto-JI-cdX" firstAttribute="width" secondItem="SF3-5y-WMV" secondAttribute="width" id="Gqg-6u-JPS"/>
                 <constraint firstItem="Hfl-hB-LaD" firstAttribute="width" secondItem="Lto-JI-cdX" secondAttribute="width" id="Kos-Op-Us4"/>
                 <constraint firstItem="Hfl-hB-LaD" firstAttribute="height" secondItem="Lto-JI-cdX" secondAttribute="height" id="Rep-Tq-gp0"/>
                 <constraint firstItem="Lto-JI-cdX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Rwu-6w-y1D"/>
+                <constraint firstItem="3M3-ni-aDr" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="SGF-5f-sm2"/>
                 <constraint firstItem="Hfl-hB-LaD" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Wnd-Uq-nfo"/>
                 <constraint firstItem="SF3-5y-WMV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hcY-XJ-elB"/>
                 <constraint firstItem="Lto-JI-cdX" firstAttribute="height" secondItem="SF3-5y-WMV" secondAttribute="height" id="lvL-rJ-Ha0"/>
-                <constraint firstItem="Hfl-hB-LaD" firstAttribute="top" secondItem="Lto-JI-cdX" secondAttribute="bottom" constant="69" id="tKb-wX-Xhy"/>
-                <constraint firstItem="Lto-JI-cdX" firstAttribute="top" secondItem="SF3-5y-WMV" secondAttribute="bottom" constant="69" id="zZE-Qj-4BT"/>
+                <constraint firstItem="Hfl-hB-LaD" firstAttribute="top" secondItem="Lto-JI-cdX" secondAttribute="bottom" constant="57" id="tKb-wX-Xhy"/>
+                <constraint firstItem="Lto-JI-cdX" firstAttribute="top" secondItem="SF3-5y-WMV" secondAttribute="bottom" constant="51" id="zZE-Qj-4BT"/>
             </constraints>
+            <point key="canvasLocation" x="249" y="228"/>
         </view>
     </objects>
 </document>

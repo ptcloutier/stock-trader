@@ -7,19 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Product.h"
+@class Product;
 
 @interface Company : NSObject
 
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *logo;
+@property (strong, nonatomic) NSURL *logoURL;
 @property (strong, nonatomic) NSString *stockSymbol;
 @property (strong, nonatomic) NSString *stockPrice;
+@property (strong, nonatomic) NSString *imagePath; // path to company logo image
+@property (nonatomic) int position; //array position, changes if table is reordered
+@property (nonatomic) int companyID; // unique ID
 @property (strong, nonatomic) NSMutableArray *products;
-//-(void)addProductToProducts:(Product *)product;
-
 -(instancetype)initWithName:(NSString *)name andLogo:(NSString *)logo andStockSymbol:(NSString *)stockSymbol;
--(instancetype)initWithName:(NSString *)name andLogo:(NSString *)logo andStockSymbol:(NSString *)stockSymbol andProducts:(NSMutableArray *)products;
-;
 
 @end
