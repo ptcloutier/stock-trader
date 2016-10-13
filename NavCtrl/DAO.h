@@ -37,6 +37,10 @@
 -(void)getStockQuotes;
 -(void)undoAction;
 -(void)redoAction;
+-(void)getImageForCompany:(Company *)company;
+-(void)getImageForProduct:(Product *)product inCompany:(Company *)company;
+
+
  
 
 

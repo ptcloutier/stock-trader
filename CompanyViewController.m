@@ -26,7 +26,7 @@
 {
     [super viewWillAppear:animated];
     [self chooseView];
-    [self.dao getStockQuotes];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadTableAfterNotification:)
                                                  name:@"daoDidReceiveStockPricesNotification"
@@ -35,6 +35,7 @@
                                              selector:@selector(reloadTableAfterNotification:)
                                                  name:@"imageDownloaded"
                                                object:nil];
+    [self updateStocksAndImages];
     [self.tableView reloadData];
 }
 
@@ -60,8 +61,8 @@
     self.companyList = self.dao.companyList;
     self.emptyStateView = [[[NSBundle mainBundle]loadNibNamed:@"EmptyStateView" owner:self options:nil]firstObject];
     self.emptyStateView.hidden = true;
- 
-}
+    [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(updateStocksAndImages) userInfo:nil repeats:YES];
+    }
 
 
 - (void)didReceiveMemoryWarning
@@ -123,6 +124,24 @@
         [self.navigationItem.rightBarButtonItem setTintColor:nil];
     }
 }
+
+
+-(void)updateStocksAndImages
+{
+    for (Company *company in self.companyList) {
+          NSLog(@"%@",company.name);
+        [self.dao getStockQuotes];
+        [self.dao getImageForCompany:company];
+        for (Product *product in company.products) {
+            [self.dao getImageForProduct:product inCompany:company];
+            NSLog(@"%@",product.name);
+        }
+    }
+  
+    [self.tableView reloadData];
+}
+
+
 
 
 #pragma mark - Table view data source

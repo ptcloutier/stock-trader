@@ -487,7 +487,6 @@ static DAO *dao = nil;
 -(NSString *)saveImageAtPath:(NSString *)imagePath withURL:(NSURL *)url
 {
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithRequest:request
                                                             completionHandler:

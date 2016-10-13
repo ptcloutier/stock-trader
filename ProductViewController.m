@@ -25,6 +25,7 @@
 {
     [super viewWillAppear:animated];
     [self chooseView];
+    
     [self.tableView reloadData];
 }
 

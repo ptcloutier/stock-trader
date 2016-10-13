@@ -265,7 +265,6 @@
 		A73CB3681D4A7A5A00895D79 /* WebView */ = {
 			isa = PBXGroup;
 			children = (
-				A73A59891D53C4A500EC4F15 /* ProductFormViewController.xib */,
 				A792918C1D3840A400524F32 /* WebViewController.h */,
 				A792918D1D3840A400524F32 /* WebViewController.m */,
 			);
@@ -287,6 +286,7 @@
 			children = (
 				A757A6E11D528A5300864DFA /* ProductFormViewController.h */,
 				A757A6E21D528A5300864DFA /* ProductFormViewController.m */,
+				A73A59891D53C4A500EC4F15 /* ProductFormViewController.xib */,
 			);
 			name = ProductFormViewController;
 			sourceTree = "<group>";
