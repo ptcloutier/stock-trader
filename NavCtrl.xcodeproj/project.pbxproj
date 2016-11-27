@@ -136,29 +136,11 @@
 			children = (
 				48A656C318163BF200746D36 /* NavControllerAppDelegate.h */,
 				48A656C418163BF200746D36 /* NavControllerAppDelegate.m */,
+				A760D76C1D664C6E00D19EB1 /* NavCtrl.xcdatamodeld */,
+				48A656C618163BF200746D36 /* Images.xcassets */,
+				48A656BB18163BF200746D36 /* Supporting Files */,
 			);
 			name = AppDelegate;
-			sourceTree = "<group>";
-		};
-		483796CC1BCBF7C70062D5AB /* CompanyViewController */ = {
-			isa = PBXGroup;
-			children = (
-				48A656E318163C1B00746D36 /* CompanyViewController.h */,
-				48A656E418163C1B00746D36 /* CompanyViewController.m */,
-				48A656E518163C1B00746D36 /* CompanyViewController.xib */,
-				A79732A41D7B54AE0070444B /* EmptyStateView.xib */,
-			);
-			name = CompanyViewController;
-			sourceTree = "<group>";
-		};
-		483796CD1BCBF7EB0062D5AB /* ProductViewController */ = {
-			isa = PBXGroup;
-			children = (
-				48A656E818163F8700746D36 /* ProductViewController.h */,
-				48A656E918163F8700746D36 /* ProductViewController.m */,
-				A79732AA1D7B9F0C0070444B /* EmptyProductsView.xib */,
-			);
-			name = ProductViewController;
 			sourceTree = "<group>";
 		};
 		48A656A818163BF200746D36 = {
@@ -196,22 +178,10 @@
 		48A656BA18163BF200746D36 /* NavCtrl */ = {
 			isa = PBXGroup;
 			children = (
-				A733CCD61D77453C00146378 /* ManagedObjects */,
-				A760D76C1D664C6E00D19EB1 /* NavCtrl.xcdatamodeld */,
 				483796CB1BCBF7A00062D5AB /* AppDelegate */,
-				483796CC1BCBF7C70062D5AB /* CompanyViewController */,
-				A73CB36C1D4A7AB700895D79 /* CompanyFormViewController */,
-				483796CD1BCBF7EB0062D5AB /* ProductViewController */,
-				A757A6E61D528A7300864DFA /* ProductFormViewController */,
-				A73CB3681D4A7A5A00895D79 /* WebView */,
-				A7442C2B1D3E9B3A00CC4FC0 /* Company.h */,
-				A7442C2C1D3E9B3A00CC4FC0 /* Company.m */,
-				A7442C2E1D3E9B5A00CC4FC0 /* Product.h */,
-				A7442C2F1D3E9B5A00CC4FC0 /* Product.m */,
-				A78BD6681D4933AE00A9F871 /* DAO.h */,
-				A78BD6691D4933AE00A9F871 /* DAO.m */,
-				48A656C618163BF200746D36 /* Images.xcassets */,
-				48A656BB18163BF200746D36 /* Supporting Files */,
+				A7ABC8781DEAF7320068565D /* Model */,
+				A7ABC8791DEAF7410068565D /* View */,
+				A7ABC87A1DEAF74F0068565D /* Controller */,
 			);
 			path = NavCtrl;
 			sourceTree = "<group>";
@@ -247,7 +217,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A733CCD61D77453C00146378 /* ManagedObjects */ = {
+		A7ABC8781DEAF7320068565D /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				A71302DB1D899F4500927FF2 /* CompanyMO+CoreDataProperties.h */,
@@ -258,37 +228,43 @@
 				A71302E21D89AA4B00927FF2 /* ProductMO+CoreDataProperties.m */,
 				A71302E31D89AA4B00927FF2 /* ProductMO.h */,
 				A71302E41D89AA4B00927FF2 /* ProductMO.m */,
+				A7442C2B1D3E9B3A00CC4FC0 /* Company.h */,
+				A7442C2C1D3E9B3A00CC4FC0 /* Company.m */,
+				A7442C2E1D3E9B5A00CC4FC0 /* Product.h */,
+				A7442C2F1D3E9B5A00CC4FC0 /* Product.m */,
+				A78BD6681D4933AE00A9F871 /* DAO.h */,
+				A78BD6691D4933AE00A9F871 /* DAO.m */,
 			);
-			name = ManagedObjects;
+			name = Model;
 			sourceTree = "<group>";
 		};
-		A73CB3681D4A7A5A00895D79 /* WebView */ = {
+		A7ABC8791DEAF7410068565D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				48A656E518163C1B00746D36 /* CompanyViewController.xib */,
+				A79732A41D7B54AE0070444B /* EmptyStateView.xib */,
+				A73A598B1D53C93200EC4F15 /* FormViewController.xib */,
+				A79732AA1D7B9F0C0070444B /* EmptyProductsView.xib */,
+				A73A59891D53C4A500EC4F15 /* ProductFormViewController.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A7ABC87A1DEAF74F0068565D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				48A656E318163C1B00746D36 /* CompanyViewController.h */,
+				48A656E418163C1B00746D36 /* CompanyViewController.m */,
+				A73CB3691D4A7AA400895D79 /* FormViewController.h */,
+				A73CB36A1D4A7AA400895D79 /* FormViewController.m */,
+				48A656E818163F8700746D36 /* ProductViewController.h */,
+				48A656E918163F8700746D36 /* ProductViewController.m */,
+				A757A6E11D528A5300864DFA /* ProductFormViewController.h */,
+				A757A6E21D528A5300864DFA /* ProductFormViewController.m */,
 				A792918C1D3840A400524F32 /* WebViewController.h */,
 				A792918D1D3840A400524F32 /* WebViewController.m */,
 			);
-			name = WebView;
-			sourceTree = "<group>";
-		};
-		A73CB36C1D4A7AB700895D79 /* CompanyFormViewController */ = {
-			isa = PBXGroup;
-			children = (
-				A73CB3691D4A7AA400895D79 /* FormViewController.h */,
-				A73CB36A1D4A7AA400895D79 /* FormViewController.m */,
-				A73A598B1D53C93200EC4F15 /* FormViewController.xib */,
-			);
-			name = CompanyFormViewController;
-			sourceTree = "<group>";
-		};
-		A757A6E61D528A7300864DFA /* ProductFormViewController */ = {
-			isa = PBXGroup;
-			children = (
-				A757A6E11D528A5300864DFA /* ProductFormViewController.h */,
-				A757A6E21D528A5300864DFA /* ProductFormViewController.m */,
-				A73A59891D53C4A500EC4F15 /* ProductFormViewController.xib */,
-			);
-			name = ProductFormViewController;
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
