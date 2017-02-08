@@ -68,20 +68,20 @@
 		48A656D518163BF200746D36 /* NavCtrlTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NavCtrlTests-Info.plist"; sourceTree = "<group>"; };
 		48A656D718163BF200746D36 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		48A656D918163BF200746D36 /* NavCtrlTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavCtrlTests.m; sourceTree = "<group>"; };
-		48A656E318163C1B00746D36 /* CompanyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CompanyViewController.h; path = ../CompanyViewController.h; sourceTree = "<group>"; };
-		48A656E418163C1B00746D36 /* CompanyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CompanyViewController.m; path = ../CompanyViewController.m; sourceTree = "<group>"; };
-		48A656E518163C1B00746D36 /* CompanyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CompanyViewController.xib; path = ../CompanyViewController.xib; sourceTree = "<group>"; };
-		48A656E818163F8700746D36 /* ProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductViewController.h; path = ../ProductViewController.h; sourceTree = "<group>"; };
-		48A656E918163F8700746D36 /* ProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductViewController.m; path = ../ProductViewController.m; sourceTree = "<group>"; };
-		A710280C1D3931CC005985A0 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "../Launch Screen.storyboard"; sourceTree = "<group>"; };
+		48A656E318163C1B00746D36 /* CompanyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CompanyViewController.h; path = "/Volumes/G-DRIVE slim/Programming Projects/TurnToTech/Xcode Projects/NavCtrl/NavCtrl/NavCtrl/CompanyViewController.h"; sourceTree = "<absolute>"; };
+		48A656E418163C1B00746D36 /* CompanyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CompanyViewController.m; path = "/Volumes/G-DRIVE slim/Programming Projects/TurnToTech/Xcode Projects/NavCtrl/NavCtrl/NavCtrl/CompanyViewController.m"; sourceTree = "<absolute>"; };
+		48A656E518163C1B00746D36 /* CompanyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CompanyViewController.xib; path = "/Volumes/G-DRIVE slim/Programming Projects/TurnToTech/Xcode Projects/NavCtrl/NavCtrl/NavCtrl/CompanyViewController.xib"; sourceTree = "<absolute>"; };
+		48A656E818163F8700746D36 /* ProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductViewController.h; path = "/Volumes/G-DRIVE slim/Programming Projects/TurnToTech/Xcode Projects/NavCtrl/NavCtrl/NavCtrl/ProductViewController.h"; sourceTree = "<absolute>"; };
+		48A656E918163F8700746D36 /* ProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductViewController.m; path = "/Volumes/G-DRIVE slim/Programming Projects/TurnToTech/Xcode Projects/NavCtrl/NavCtrl/NavCtrl/ProductViewController.m"; sourceTree = "<absolute>"; };
+		A710280C1D3931CC005985A0 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "/Volumes/G-DRIVE slim/Programming Projects/TurnToTech/Xcode Projects/NavCtrl/NavCtrl/NavCtrl/Launch Screen.storyboard"; sourceTree = "<absolute>"; };
 		A71302DB1D899F4500927FF2 /* CompanyMO+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CompanyMO+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A71302DC1D899F4500927FF2 /* CompanyMO+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CompanyMO+CoreDataProperties.m"; sourceTree = "<group>"; };
 		A71302DD1D899F4500927FF2 /* CompanyMO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyMO.h; sourceTree = "<group>"; };
 		A71302DE1D899F4500927FF2 /* CompanyMO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyMO.m; sourceTree = "<group>"; };
-		A71302E11D89AA4B00927FF2 /* ProductMO+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ProductMO+CoreDataProperties.h"; path = "../ProductMO+CoreDataProperties.h"; sourceTree = "<group>"; };
-		A71302E21D89AA4B00927FF2 /* ProductMO+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ProductMO+CoreDataProperties.m"; path = "../ProductMO+CoreDataProperties.m"; sourceTree = "<group>"; };
-		A71302E31D89AA4B00927FF2 /* ProductMO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductMO.h; path = ../ProductMO.h; sourceTree = "<group>"; };
-		A71302E41D89AA4B00927FF2 /* ProductMO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductMO.m; path = ../ProductMO.m; sourceTree = "<group>"; };
+		A71302E11D89AA4B00927FF2 /* ProductMO+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ProductMO+CoreDataProperties.h"; path = "/Volumes/G-DRIVE slim/Programming Projects/TurnToTech/Xcode Projects/NavCtrl/NavCtrl/NavCtrl/ProductMO+CoreDataProperties.h"; sourceTree = "<absolute>"; };
+		A71302E21D89AA4B00927FF2 /* ProductMO+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ProductMO+CoreDataProperties.m"; path = "/Volumes/G-DRIVE slim/Programming Projects/TurnToTech/Xcode Projects/NavCtrl/NavCtrl/NavCtrl/ProductMO+CoreDataProperties.m"; sourceTree = "<absolute>"; };
+		A71302E31D89AA4B00927FF2 /* ProductMO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductMO.h; path = "/Volumes/G-DRIVE slim/Programming Projects/TurnToTech/Xcode Projects/NavCtrl/NavCtrl/NavCtrl/ProductMO.h"; sourceTree = "<absolute>"; };
+		A71302E41D89AA4B00927FF2 /* ProductMO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductMO.m; path = "/Volumes/G-DRIVE slim/Programming Projects/TurnToTech/Xcode Projects/NavCtrl/NavCtrl/NavCtrl/ProductMO.m"; sourceTree = "<absolute>"; };
 		A73A59891D53C4A500EC4F15 /* ProductFormViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductFormViewController.xib; sourceTree = "<group>"; };
 		A73A598B1D53C93200EC4F15 /* FormViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormViewController.xib; sourceTree = "<group>"; };
 		A73CB3691D4A7AA400895D79 /* FormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormViewController.h; sourceTree = "<group>"; };
@@ -132,8 +132,6 @@
 			children = (
 				48A656C318163BF200746D36 /* NavControllerAppDelegate.h */,
 				48A656C418163BF200746D36 /* NavControllerAppDelegate.m */,
-				48A656C618163BF200746D36 /* Images.xcassets */,
-				48A656BB18163BF200746D36 /* Supporting Files */,
 			);
 			name = AppDelegate;
 			sourceTree = "<group>";
@@ -141,7 +139,7 @@
 		48A656A818163BF200746D36 = {
 			isa = PBXGroup;
 			children = (
-				48A656BA18163BF200746D36 /* NavCtrl */,
+				48A656BA18163BF200746D36 /* StockTrader */,
 				48A656D318163BF200746D36 /* NavCtrlTests */,
 				48A656B318163BF200746D36 /* Frameworks */,
 				48A656B218163BF200746D36 /* Products */,
@@ -169,28 +167,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		48A656BA18163BF200746D36 /* NavCtrl */ = {
+		48A656BA18163BF200746D36 /* StockTrader */ = {
 			isa = PBXGroup;
 			children = (
 				A760D76C1D664C6E00D19EB1 /* NavCtrl.xcdatamodeld */,
-				A710280C1D3931CC005985A0 /* Launch Screen.storyboard */,
+				48A656C618163BF200746D36 /* Images.xcassets */,
+				48A656BC18163BF200746D36 /* NavCtrl-Info.plist */,
+				48A656BD18163BF200746D36 /* InfoPlist.strings */,
+				48A656C018163BF200746D36 /* main.m */,
+				48A656C218163BF200746D36 /* NavCtrl-Prefix.pch */,
 				483796CB1BCBF7A00062D5AB /* AppDelegate */,
 				A7ABC8781DEAF7320068565D /* Model */,
 				A7ABC8791DEAF7410068565D /* View */,
 				A7ABC87A1DEAF74F0068565D /* Controller */,
 			);
+			name = StockTrader;
 			path = NavCtrl;
-			sourceTree = "<group>";
-		};
-		48A656BB18163BF200746D36 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				48A656BC18163BF200746D36 /* NavCtrl-Info.plist */,
-				48A656BD18163BF200746D36 /* InfoPlist.strings */,
-				48A656C018163BF200746D36 /* main.m */,
-				48A656C218163BF200746D36 /* NavCtrl-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		48A656D318163BF200746D36 /* NavCtrlTests */ = {
@@ -235,6 +227,7 @@
 		A7ABC8791DEAF7410068565D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A710280C1D3931CC005985A0 /* Launch Screen.storyboard */,
 				48A656E518163C1B00746D36 /* CompanyViewController.xib */,
 				A79732A41D7B54AE0070444B /* EmptyStateView.xib */,
 				A73A598B1D53C93200EC4F15 /* FormViewController.xib */,
@@ -317,7 +310,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 48A656AC18163BF200746D36 /* Build configuration list for PBXProject "Stock Trader" */;
+			buildConfigurationList = 48A656AC18163BF200746D36 /* Build configuration list for PBXProject "StockTrader" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -578,7 +571,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		48A656AC18163BF200746D36 /* Build configuration list for PBXProject "Stock Trader" */ = {
+		48A656AC18163BF200746D36 /* Build configuration list for PBXProject "StockTrader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				48A656DB18163BF200746D36 /* Debug */,
